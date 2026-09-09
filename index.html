@@ -370,27 +370,57 @@
         }
         .no-results .emoji { font-size: 3rem; margin-bottom: 12px; }
         .highlight { background: rgba(74, 222, 128, 0.2); border-radius: 2px; }
-        .nav-links {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px 20px 0;
-            text-align: center;
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 20px;
         }
-        .nav-link {
+        .navbar .brand {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .navbar .nav-link {
             display: inline-block;
-            padding: 8px 18px;
+            padding: 7px 14px;
             border-radius: 20px;
             background: rgba(56, 189, 248, 0.1);
             border: 1px solid rgba(56, 189, 248, 0.35);
             color: var(--accent2);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: background 0.2s, border-color 0.2s;
         }
-        .nav-link:hover {
+        .navbar .nav-link:hover {
             background: rgba(56, 189, 248, 0.2);
             border-color: var(--accent2);
+        }
+        .navbar .nav-link.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0f172a;
+        }
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; align-items: stretch; text-align: center; }
+            .navbar .nav-links { justify-content: center; }
         }
         .section-divider {
             max-width: 1200px;
@@ -449,6 +479,15 @@
     </style>
 </head>
 <body>
+
+<nav class="navbar">
+    <a href="index.html" class="brand">&#x1F6D2; Merced Deals</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link active">All Deals</a>
+        <a href="compare.html" class="nav-link">Price Comparison</a>
+        <a href="stores.html" class="nav-link">Store Directory</a>
+    </div>
+</nav>
 
 <div class="hero">
     <h1>&#x1F6D2; Merced CA Grocery Deals</h1>
@@ -510,11 +549,6 @@
     <span class="stat">Showing <strong id="dealCount">0</strong> deals</span>
     <span class="stat">From <strong id="storeCount">15</strong> stores</span>
     <span class="stat">Best price highlighted in <strong style="color: var(--accent);">green</strong></span>
-</div>
-
-<div class="nav-links">
-    <a href="compare.html" class="nav-link">&#x1F4CA; Price Comparison Table &rarr;</a>
-    <a href="stores.html" class="nav-link">&#x1F6D2; Store Directory &rarr;</a>
 </div>
 
 <div class="section-divider"></div>

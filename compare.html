@@ -52,24 +52,57 @@
             font-size: 0.85rem;
             color: var(--accent);
         }
-        .nav-links {
-            margin-top: 16px;
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 20px;
         }
-        .nav-link {
+        .navbar .brand {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .navbar .nav-link {
             display: inline-block;
-            padding: 8px 18px;
+            padding: 7px 14px;
             border-radius: 20px;
             background: rgba(56, 189, 248, 0.1);
             border: 1px solid rgba(56, 189, 248, 0.35);
             color: var(--accent2);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: background 0.2s, border-color 0.2s;
         }
-        .nav-link:hover {
+        .navbar .nav-link:hover {
             background: rgba(56, 189, 248, 0.2);
             border-color: var(--accent2);
+        }
+        .navbar .nav-link.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0f172a;
+        }
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; align-items: stretch; text-align: center; }
+            .navbar .nav-links { justify-content: center; }
         }
         .controls {
             max-width: 1200px;
@@ -258,14 +291,19 @@
 </head>
 <body>
 
+<nav class="navbar">
+    <a href="index.html" class="brand">&#x1F6D2; Merced Deals</a>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">All Deals</a>
+        <a href="compare.html" class="nav-link active">Price Comparison</a>
+        <a href="stores.html" class="nav-link">Store Directory</a>
+    </div>
+</nav>
+
 <div class="hero">
     <h1>&#x1F4CA; Merced CA Price Comparison</h1>
     <div class="subtitle">Same item, side-by-side across stores &mdash; click any store to see it there</div>
     <div class="date-range" id="dateRange">Sep 2 &ndash; Sep 8, 2026</div>
-    <div class="nav-links">
-        <a href="index.html" class="nav-link">&larr; All Deals</a>
-        <a href="stores.html" class="nav-link">Store Directory &rarr;</a>
-    </div>
 </div>
 
 <div class="controls">
