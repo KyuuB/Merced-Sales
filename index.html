@@ -427,7 +427,7 @@
 
 <div class="controls">
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search any product... (e.g. chicken, milk, eggs, Doritos)" autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Search any product... (typos OK — e.g. chicken, milk, eggs, Doritos)" autocomplete="off">
     </div>
     <div class="sort-controls">
         <label>Sort by:</label>
@@ -1344,17 +1344,55 @@ function init() {
 }
 
 // ===== FILTERING =====
+// Forgiving search: order-independent tokens, partial words, plurals, and small typos.
+function normalizeToken(t) {
+    return t.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '')
+        .replace(/ies$/, 'y')
+        .replace(/s$/, '');
+}
+
+function tokenize(s) {
+    return s.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map(normalizeToken);
+}
+
+function editDistance(a, b) {
+    if (a === b) return 0;
+    if (Math.abs(a.length - b.length) > 2) return 3;
+    const m = a.length, n = b.length;
+    let prev = Array.from({ length: n + 1 }, (_, j) => j);
+    for (let i = 1; i <= m; i++) {
+        const cur = [i];
+        for (let j = 1; j <= n; j++) {
+            cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        }
+        prev = cur;
+    }
+    return prev[n];
+}
+
+function tokenMatches(qToken, fieldTokens) {
+    return fieldTokens.some(ft =>
+        ft === qToken ||
+        (qToken.length >= 3 && ft.startsWith(qToken)) ||
+        (qToken.length >= 4 && editDistance(ft, qToken) <= 1) ||
+        (qToken.length >= 6 && editDistance(ft, qToken) <= 2)
+    );
+}
+
+function matchesSearch(d) {
+    if (!searchQuery) return true;
+    const qTokens = tokenize(searchQuery);
+    if (!qTokens.length) return true;
+    const fieldTokens = tokenize([d.item, d.store, d.category, d.note || ''].join(' '));
+    return qTokens.every(qt => tokenMatches(qt, fieldTokens));
+}
+
 function getFilteredDeals() {
     return deals.filter(d => {
         if (activeStore !== 'all' && d.store !== activeStore) return false;
         if (activeCategory !== 'all' && d.category !== activeCategory) return false;
-        if (searchQuery) {
-            const q = searchQuery.toLowerCase();
-            return d.item.toLowerCase().includes(q) || 
-                   d.store.toLowerCase().includes(q) ||
-                   d.category.toLowerCase().includes(q);
-        }
-        return true;
+        return matchesSearch(d);
     });
 }
 
@@ -1437,7 +1475,9 @@ function isCheapestAtStore(item, store, price) {
 
 function highlightSearch(text) {
     if (!searchQuery) return text;
-    const regex = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const tokens = searchQuery.toLowerCase().split(/[^a-z0-9]+/).filter(t => t.length >= 2);
+    if (!tokens.length) return text;
+    const regex = new RegExp(`(${tokens.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
     return text.replace(regex, '<span class="highlight">$1</span>');
 }
 
@@ -1480,7 +1520,7 @@ function renderCompareTable() {
     
     if (searchQuery) {
         multiStoreItems = Object.entries(itemStores)
-            .filter(([item]) => item.toLowerCase().includes(searchQuery.toLowerCase()))
+            .filter(([item]) => matchesSearch({ item, store: '', category: '', note: '' }))
             .sort((a, b) => {
                 const minA = Math.min(...Object.values(a[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
                 const minB = Math.min(...Object.values(b[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
