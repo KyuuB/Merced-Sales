@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merced CA - Price Comparison</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --card: #1a1d27;
+            --card-hover: #22263a;
+            --accent: #4ade80;
+            --accent2: #38bdf8;
+            --accent3: #f472b6;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: #2d3348;
+            --danger: #ef4444;
+            --orange: #fb923c;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1d27 0%, #0f2027 50%, #203a43 100%);
+            padding: 40px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .hero .subtitle {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+        .hero .date-range {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+        .nav-links {
+            margin-top: 16px;
+        }
+        .nav-link {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .nav-link:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent2);
+        }
+        .controls {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus { border-color: var(--accent); }
+        .search-box::before {
+            content: '\1F50D';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+        .category-tabs {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .cat-tab {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .cat-tab:hover { border-color: var(--accent); color: var(--text); }
+        .cat-tab.active {
+            background: rgba(74, 222, 128, 0.12);
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .stats-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8px 20px 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .stats-bar .stat strong { color: var(--text); }
+        .compare-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px 40px;
+        }
+        .compare-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: border-color 0.2s;
+        }
+        .compare-row:hover { border-color: rgba(74, 222, 128, 0.4); }
+        .item-cell {
+            flex: 1 1 220px;
+            min-width: 200px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+        .item-cell .item-link {
+            color: var(--text);
+            text-decoration: none;
+        }
+        .item-cell .item-link:hover { color: var(--accent); }
+        .item-cell .store-count {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 3 1 400px;
+        }
+        .store-chip {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(74, 222, 128, 0.06);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .store-chip:hover {
+            border-color: var(--accent);
+            background: rgba(74, 222, 128, 0.12);
+        }
+        .store-chip.best {
+            background: rgba(74, 222, 128, 0.18);
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+        .store-chip .chip-store { color: var(--muted); }
+        .store-chip.best .chip-store { color: var(--accent); }
+        .store-chip .chip-bogo {
+            color: var(--accent2);
+            font-size: 0.68rem;
+            font-weight: 700;
+            margin-left: 2px;
+        }
+        .highlight {
+            background: rgba(250, 204, 21, 0.25);
+            color: #fde047;
+            border-radius: 3px;
+            padding: 0 2px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+        .no-results .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+        .loading .spinner {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .footer {
+            text-align: center;
+            padding: 24px 20px 40px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.5rem; }
+            .search-box { min-width: 100%; }
+            .item-cell { flex-basis: 100%; }
+            .compare-row { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>&#x1F4CA; Merced CA Price Comparison</h1>
+    <div class="subtitle">Same item, side-by-side across stores &mdash; click any store to see it there</div>
+    <div class="date-range" id="dateRange">Sep 2 &ndash; Sep 8, 2026</div>
+    <div class="nav-links">
+        <a href="index.html" class="nav-link">&larr; All Deals</a>
+    </div>
+</div>
+
+<div class="controls">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search any product... (typos OK &mdash; e.g. chicken, milk, eggs)" autocomplete="off">
+    </div>
+</div>
+
+<div class="category-tabs" id="categoryTabs">
+    <button class="cat-tab active" data-cat="all">All</button>
+    <button class="cat-tab" data-cat="Produce">Produce</button>
+    <button class="cat-tab" data-cat="Meat & Seafood">Meat & Seafood</button>
+    <button class="cat-tab" data-cat="Dairy & Eggs">Dairy & Eggs</button>
+    <button class="cat-tab" data-cat="Frozen">Frozen</button>
+    <button class="cat-tab" data-cat="Beverages">Beverages</button>
+    <button class="cat-tab" data-cat="Snacks">Snacks</button>
+    <button class="cat-tab" data-cat="Pantry">Pantry</button>
+    <button class="cat-tab" data-cat="Household">Household</button>
+    <button class="cat-tab" data-cat="Bakery & Deli">Bakery & Deli</button>
+</div>
+
+<div class="stats-bar">
+    <span class="stat">Comparing <strong id="compareCount">0</strong> items</span>
+    <span class="stat">Best price highlighted in <strong style="color: var(--accent);">green</strong></span>
+    <span class="stat">Only stores carrying the item are shown</span>
+</div>
+
+<div class="compare-list" id="compareList">
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading deals data...</p>
+    </div>
+</div>
+
+<div class="no-results" id="compareEmpty" style="display:none;">
+    <div class="emoji">&#x1F50D;</div>
+    <p>No items to compare.</p>
+    <p style="font-size: 0.85rem; margin-top: 8px;">Try a different keyword or category.</p>
+</div>
+
+<div class="footer">
+    <p>Merced CA Grocery Deals &bull; Prices may vary by location</p>
+    <p style="margin-top: 4px;">Some prices require store loyalty cards. Always verify in-store before shopping.</p>
+</div>
+
+<script>
+// ===== STORE WEEKLY-AD SOURCE LINKS =====
+const storeSources = {
+    "FoodMaxx": "https://foodmaxx.com/flyers",
+    "Food 4 Less": "https://www.food4less.com/weeklyad",
+    "Walmart": "https://www.walmart.com/cp/food/976759",
+    "Target": "https://www.target.com/weekly-ad",
+    "Save Mart": "https://shop.savemart.com/store/savemart/flyers",
+    "Vallarta": "https://vallartasupermarkets.com/store-locations/merced-olive-ave/#weekly-specials",
+    "Whole Foods": "https://www.wholefoodsmarket.com/sales-flyer",
+    "Raley's": "https://www.raleys.com/weekly-ad",
+    "Cardenas": "https://shop.cardenasmarkets.com/store/cardenas-marketplace/flyers/weekly",
+    "Sprouts": "https://shop.sprouts.com/store/sprouts/flyers/weekly",
+    "Smart & Final": "https://www.smartandfinal.com/circular",
+    "Grocery Outlet": "https://www.groceryoutlet.com/circulars",
+    "Rancho San Miguel": "https://ranchosanmiguelmarkets.com/store/rancho-san-miguel/flyers/weekly",
+    "Costco": "https://www.costco.com/o/-/warehouse-savings/",
+    "DG Market": "https://www.dollargeneral.com/deals/weekly-ads"
+};
+
+// Deep-link: per-item search URL for stores with product search
+function searchUrlFor(store, item) {
+    const q = encodeURIComponent(item);
+    switch (store) {
+        case "Walmart": return `https://www.walmart.com/search?q=${q}`;
+        case "Target": return `https://www.target.com/s?searchTerm=${q}`;
+        case "Costco": return `https://www.costco.com/search?keyword=${q}`;
+        case "DG Market": return `https://www.dollargeneral.com/search?q=${q}`;
+        default: return null;
+    }
+}
+
+// ===== BOGO EFFECTIVE-PRICE CALCULATION =====
+const bogoMultiplier = { FREE: 0.5, SUPER: 0.5, "50": 0.75, "25": 0.625, "20": 0.6, "3+3": 0.5 };
+function getEffectivePrice(d) {
+    if (d.bogo && bogoMultiplier[d.bogo] != null) {
+        return +(d.price * bogoMultiplier[d.bogo]).toFixed(2);
+    }
+    return null;
+}
+
+// ===== FORGIVING SEARCH =====
+function normalizeToken(t) {
+    return t.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '')
+        .replace(/ies$/, 'y')
+        .replace(/s$/, '');
+}
+
+function tokenize(s) {
+    return s.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map(normalizeToken);
+}
+
+function editDistance(a, b) {
+    if (a === b) return 0;
+    if (Math.abs(a.length - b.length) > 2) return 3;
+    const m = a.length, n = b.length;
+    let prev = Array.from({ length: n + 1 }, (_, j) => j);
+    for (let i = 1; i <= m; i++) {
+        const cur = [i];
+        for (let j = 1; j <= n; j++) {
+            cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        }
+        prev = cur;
+    }
+    return prev[n];
+}
+
+function tokenMatches(qToken, fieldTokens) {
+    return fieldTokens.some(ft =>
+        ft === qToken ||
+        (qToken.length >= 3 && ft.startsWith(qToken)) ||
+        (qToken.length >= 4 && editDistance(ft, qToken) <= 1) ||
+        (qToken.length >= 6 && editDistance(ft, qToken) <= 2)
+    );
+}
+
+function matchesSearch(d) {
+    if (!searchQuery) return true;
+    const qTokens = tokenize(searchQuery);
+    if (!qTokens.length) return true;
+    const fieldTokens = tokenize([d.item, d.store, d.category, d.note || ''].join(' '));
+    return qTokens.every(qt => tokenMatches(qt, fieldTokens));
+}
+
+function highlightSearch(text) {
+    if (!searchQuery) return text;
+    const tokens = searchQuery.toLowerCase().split(/[^a-z0-9]+/).filter(t => t.length >= 2);
+    if (!tokens.length) return text;
+    const regex = new RegExp(`(${tokens.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
+
+// ===== STATE =====
+let deals = [];
+let searchQuery = '';
+let activeCategory = 'all';
+
+// ===== DATA LOADING =====
+// The deals array lives in the main deals page (index.html on the live site,
+// merced-grocery-deals.html locally). Fetch it and extract the array so this
+// page always stays in sync with the weekly automation update.
+async function loadDeals() {
+    const candidates = ['index.html', 'merced-grocery-deals.html'];
+    for (const c of candidates) {
+        try {
+            const res = await fetch(c);
+            if (!res.ok) continue;
+            const html = await res.text();
+            const m = html.match(/const deals = (\[[\s\S]*?\n\]);/);
+            if (m) {
+                deals = new Function('return ' + m[1])();
+                return true;
+            }
+        } catch (e) { /* try next candidate */ }
+    }
+    return false;
+}
+
+// ===== RENDER =====
+function renderCompare() {
+    const list = document.getElementById('compareList');
+    const empty = document.getElementById('compareEmpty');
+    
+    // Group items by name (respecting the active category filter)
+    const itemStores = {};
+    deals.forEach(d => {
+        if (activeCategory !== 'all' && d.category !== activeCategory) return;
+        if (!itemStores[d.item]) itemStores[d.item] = {};
+        itemStores[d.item][d.store] = d;
+    });
+    
+    let items = Object.entries(itemStores);
+    if (searchQuery) {
+        // While searching, show every matching item (even single-store)
+        items = items.filter(([item]) => matchesSearch({ item, store: '', category: '', note: '' }));
+    } else {
+        // Otherwise only items carried at 2+ stores
+        items = items.filter(([_, stores]) => Object.keys(stores).length >= 2);
+    }
+    
+    // Sort by cheapest price across stores
+    items.sort((a, b) => {
+        const minA = Math.min(...Object.values(a[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
+        const minB = Math.min(...Object.values(b[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
+        return minA - minB;
+    });
+    
+    document.getElementById('compareCount').textContent = items.length;
+    empty.style.display = items.length ? 'none' : 'block';
+    
+    list.innerHTML = items.map(([item, storeMap]) => {
+        const entries = Object.values(storeMap);
+        const prices = entries.map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price));
+        const minPrice = Math.min(...prices);
+        const cheapest = entries.find(d => (getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)) === minPrice);
+        
+        // Item name links to the cheapest store's item page
+        const itemLink = cheapest.source || searchUrlFor(cheapest.store, cheapest.item) || storeSources[cheapest.store] || '#';
+        const itemHtml = itemLink !== '#'
+            ? `<a class="item-link" href="${itemLink}" target="_blank" rel="noopener" title="View in ${cheapest.store}">${highlightSearch(item)}</a>`
+            : `<span>${highlightSearch(item)}</span>`;
+        
+        // One clickable chip per store that carries the item, cheapest first
+        const chips = entries
+            .sort((a, b) => (getEffectivePrice(a) ?? (a.unitPrice != null ? a.unitPrice : a.price)) - (getEffectivePrice(b) ?? (b.unitPrice != null ? b.unitPrice : b.price)))
+            .map(d => {
+                const p = getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price);
+                const isBest = p === minPrice;
+                const link = d.source || searchUrlFor(d.store, d.item) || storeSources[d.store] || '#';
+                const unitLabel = d.unitPrice != null ? ' /unit' : (d.unit ? ' ' + d.unit : '');
+                const bogoTag = d.bogo ? ' <span class="chip-bogo">BOGO</span>' : '';
+                return `<a class="store-chip${isBest ? ' best' : ''}" href="${link}" target="_blank" rel="noopener" title="View in ${d.store}">
+                    <span class="chip-store">${d.store}</span> $${p.toFixed(2)}${unitLabel}${bogoTag}
+                </a>`;
+            }).join('');
+        
+        return `<div class="compare-row">
+            <div class="item-cell">${itemHtml}<span class="store-count">${entries.length} stores</span></div>
+            <div class="chips">${chips}</div>
+        </div>`;
+    }).join('');
+}
+
+// ===== LISTENERS =====
+function setupListeners() {
+    document.getElementById('searchInput').addEventListener('input', e => {
+        searchQuery = e.target.value.trim();
+        renderCompare();
+    });
+    
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            activeCategory = tab.dataset.cat;
+            renderCompare();
+        });
+    });
+}
+
+// ===== INIT =====
+(async function init() {
+    const ok = await loadDeals();
+    if (!ok) {
+        document.getElementById('compareList').innerHTML =
+            '<div class="no-results"><div class="emoji">&#x26A0;&#xFE0F;</div><p>Could not load deals data.</p>' +
+            '<p style="font-size: 0.85rem; margin-top: 8px;">Open the main deals page first, then try again.</p></div>';
+        return;
+    }
+    renderCompare();
+    setupListeners();
+})();
+</script>
+</body>
+</html>

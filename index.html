@@ -361,6 +361,28 @@
         }
         .no-results .emoji { font-size: 3rem; margin-bottom: 12px; }
         .highlight { background: rgba(74, 222, 128, 0.2); border-radius: 2px; }
+        .nav-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px 0;
+            text-align: center;
+        }
+        .nav-link {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .nav-link:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent2);
+        }
         .section-divider {
             max-width: 1200px;
             margin: 20px auto;
@@ -436,7 +458,7 @@
             <option value="price-desc">Price: High to Low</option>
             <option value="name">Name A-Z</option>
             <option value="store">Store</option>
-            <option value="savings">Biggest Savings</option>
+            <option value="savings" selected>Biggest Savings</option>
         </select>
     </div>
 </div>
@@ -481,35 +503,8 @@
     <span class="stat">Best price highlighted in <strong style="color: var(--accent);">green</strong></span>
 </div>
 
-<div class="compare-section">
-    <h2>&#x1F4CA; Price Comparison Table</h2>
-    <p style="color: var(--muted); font-size: 0.82rem; margin-bottom: 12px;">Items that appear at multiple stores are compared side-by-side. Click any column header to sort.</p>
-    <div class="compare-table-wrap">
-        <table class="compare-table" id="compareTable">
-            <thead>
-                <tr>
-                    <th data-sort="item">Item &#x25B4;&#x25BE;</th>
-                    <th data-sort="FoodMaxx">FoodMaxx</th>
-                    <th data-sort="Food 4 Less">F4Less</th>
-                    <th data-sort="Walmart">Walmart</th>
-                    <th data-sort="Target">Target</th>
-                    <th data-sort="Save Mart">Save Mart</th>
-                    <th data-sort="Vallarta">Vallarta</th>
-                    <th data-sort="Whole Foods">Whole F.</th>
-                    <th data-sort="Raley's">Raley's</th>
-                    <th data-sort="Cardenas">Cardenas</th>
-                    <th data-sort="Sprouts">Sprouts</th>
-                    <th data-sort="Smart & Final">S&F</th>
-                    <th data-sort="Grocery Outlet">G.O.</th>
-                    <th data-sort="Rancho San Miguel">R.S.M.</th>
-                    <th data-sort="Costco">Costco</th>
-                    <th data-sort="DG Market">DG</th>
-                    <th data-sort="best">Best &#x25B4;&#x25BE;</th>
-                </tr>
-            </thead>
-            <tbody id="compareBody"></tbody>
-        </table>
-    </div>
+<div class="nav-links">
+    <a href="compare.html" class="nav-link">&#x1F4CA; Price Comparison Table &rarr;</a>
 </div>
 
 <div class="section-divider"></div>
@@ -519,8 +514,9 @@
     <div class="compare-grid" id="dealsGrid"></div>
     <div class="no-results" id="noResults" style="display:none;">
         <div class="emoji">&#x1F50D;</div>
-        <p>No deals found matching your search.</p>
+        <p id="noResultsMsg">No deals found matching your search.</p>
         <p style="font-size: 0.85rem; margin-top: 8px;">Try a different keyword or clear your filters.</p>
+        <button class="filter-btn" id="tryAllStores" style="display:none; margin-top: 10px;">Show All Stores</button>
     </div>
 </div>
 
@@ -1338,7 +1334,6 @@ let searchQuery = '';
 
 // ===== INIT =====
 function init() {
-    renderCompareTable();
     renderDeals();
     setupListeners();
 }
@@ -1426,6 +1421,21 @@ function renderDeals() {
     if (sorted.length === 0) {
         grid.innerHTML = '';
         noResults.style.display = 'block';
+        const msg = document.getElementById('noResultsMsg');
+        const tryBtn = document.getElementById('tryAllStores');
+        if (searchQuery && activeStore !== 'all') {
+            const otherStores = [...new Set(deals.filter(d => d.store !== activeStore && matchesSearch(d)).map(d => d.store))];
+            if (otherStores.length) {
+                msg.innerHTML = `No <strong>${escapeHtml(searchQuery)}</strong> deals at <strong>${escapeHtml(activeStore)}</strong> &mdash; but it's available at: <strong>${otherStores.map(escapeHtml).join(', ')}</strong>.`;
+                tryBtn.style.display = 'inline-block';
+            } else {
+                msg.innerHTML = 'No deals found matching your search.';
+                tryBtn.style.display = 'none';
+            }
+        } else {
+            msg.innerHTML = 'No deals found matching your search.';
+            tryBtn.style.display = 'none';
+        }
         return;
     }
     noResults.style.display = 'none';
@@ -1473,6 +1483,10 @@ function isCheapestAtStore(item, store, price) {
     });
 }
 
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function highlightSearch(text) {
     if (!searchQuery) return text;
     const tokens = searchQuery.toLowerCase().split(/[^a-z0-9]+/).filter(t => t.length >= 2);
@@ -1481,96 +1495,11 @@ function highlightSearch(text) {
     return text.replace(regex, '<span class="highlight">$1</span>');
 }
 
-// ===== RENDER COMPARE TABLE =====
-function renderCompareTable() {
-    const compareSection = document.querySelector('.compare-section');
-    const compareHeading = compareSection.querySelector('h2');
-    const compareSub = compareSection.querySelector('p');
-    
-    // When a specific store is selected, hide the comparison table
-    // (nothing to compare with just one store)
-    if (activeStore !== 'all') {
-        document.getElementById('compareTable').style.display = 'none';
-        compareHeading.style.display = 'none';
-        compareSub.style.display = 'none';
-        return;
-    }
-    
-    document.getElementById('compareTable').style.display = '';
-    compareHeading.style.display = '';
-    compareSub.style.display = '';
-    
-    // Group items that appear at multiple stores
-    const itemStores = {};
-    deals.forEach(d => {
-        // Respect the active category filter
-        if (activeCategory !== 'all' && d.category !== activeCategory) return;
-        if (!itemStores[d.item]) itemStores[d.item] = {};
-        itemStores[d.item][d.store] = d;
-    });
-    
-    // Only show items at 2+ stores, or all items if searching
-    let multiStoreItems = Object.entries(itemStores)
-        .filter(([_, stores]) => Object.keys(stores).length >= 2)
-        .sort((a, b) => {
-            const minA = Math.min(...Object.values(a[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
-            const minB = Math.min(...Object.values(b[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
-            return minA - minB;
-        });
-    
-    if (searchQuery) {
-        multiStoreItems = Object.entries(itemStores)
-            .filter(([item]) => matchesSearch({ item, store: '', category: '', note: '' }))
-            .sort((a, b) => {
-                const minA = Math.min(...Object.values(a[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
-                const minB = Math.min(...Object.values(b[1]).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price)));
-                return minA - minB;
-            });
-    }
-    
-    const stores = ["FoodMaxx","Food 4 Less","Walmart","Target","Save Mart","Vallarta","Whole Foods","Raley's","Cardenas","Sprouts","Smart & Final","Grocery Outlet","Rancho San Miguel","Costco","DG Market"];
-    const body = document.getElementById('compareBody');
-    
-    body.innerHTML = multiStoreItems.map(([item, storeMap]) => {
-        // Use effective BOGO price / unitPrice for fair comparison when available
-        const prices = Object.values(storeMap).map(d => getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price));
-        const minPrice = Math.min(...prices);
-        
-        const cells = stores.map(s => {
-            if (storeMap[s]) {
-                const d = storeMap[s];
-                const comparePrice = getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price);
-                const isBest = comparePrice === minPrice && prices.length > 1;
-                const displayPrice = comparePrice;
-                const unitLabel = d.unitPrice != null ? 'per unit' : (d.unit || '');
-                const bogoTag = d.bogo ? ' <span style="color:var(--accent2);font-size:0.7rem;font-weight:700;">BOGO</span>' : '';
-                return `<td class="${isBest ? 'best-cell' : ''}">$${displayPrice.toFixed(2)}${unitLabel ? ' <span style="color:var(--muted);font-size:0.75rem">'+unitLabel+'</span>' : ''}${bogoTag}</td>`;
-            }
-            return '<td class="na-cell">&mdash;</td>';
-        }).join('');
-        
-        const storeCount = Object.keys(storeMap).length;
-        // Link the item name to the cheapest store's ad (or first store's ad)
-        const cheapestEntry = Object.values(storeMap).sort((a,b) =>
-            (getEffectivePrice(a) ?? (a.unitPrice != null ? a.unitPrice : a.price)) - (getEffectivePrice(b) ?? (b.unitPrice != null ? b.unitPrice : b.price)))[0];
-        const linkUrl = cheapestEntry.source || searchUrlFor(cheapestEntry.store, cheapestEntry.item) || storeSources[cheapestEntry.store] || '#';
-        const itemHtml = linkUrl !== '#'
-            ? `<a class="item-link" href="${linkUrl}" target="_blank" rel="noopener" title="View in ${cheapestEntry.store} weekly ad">${item}</a>`
-            : item;
-        return `<tr>
-            <td style="font-weight:600;max-width:220px;">${itemHtml}<br><span style="font-size:0.72rem;color:var(--muted);">${storeCount} stores</span></td>
-            ${cells}
-            <td class="best-cell">$${minPrice.toFixed(2)}</td>
-        </tr>`;
-    }).join('');
-}
-
 // ===== LISTENERS =====
 function setupListeners() {
     document.getElementById('searchInput').addEventListener('input', e => {
         searchQuery = e.target.value.trim();
         renderDeals();
-        renderCompareTable();
     });
     
     document.getElementById('sortSelect').addEventListener('change', () => {
@@ -1585,7 +1514,6 @@ function setupListeners() {
             document.getElementById('storeCount').textContent = 
                 activeStore === 'all' ? 15 : 1;
             renderDeals();
-            renderCompareTable();
         });
     });
     
@@ -1595,8 +1523,16 @@ function setupListeners() {
             tab.classList.add('active');
             activeCategory = tab.dataset.cat;
             renderDeals();
-            renderCompareTable();
         });
+    });
+    
+    // "Show All Stores" button in the no-results prompt
+    document.getElementById('tryAllStores').addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.filter-btn[data-store="all"]').classList.add('active');
+        activeStore = 'all';
+        document.getElementById('storeCount').textContent = 15;
+        renderDeals();
     });
     
     // Tap/click a card to expand details (mobile); item links still open normally
@@ -1605,14 +1541,6 @@ function setupListeners() {
         if (!card) return;
         if (e.target.closest('a')) return;
         card.classList.toggle('expanded');
-    });
-    
-    // Table header sorting
-    document.querySelectorAll('.compare-table th[data-sort]').forEach(th => {
-        th.addEventListener('click', () => {
-            // Simple re-render for now
-            renderCompareTable();
-        });
     });
 }
 
