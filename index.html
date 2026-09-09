@@ -217,6 +217,8 @@
         .store-smartfinal { background: rgba(14, 165, 233, 0.2); color: #38bdf8; }
         .store-groceryoutlet { background: rgba(250, 204, 21, 0.2); color: #facc15; }
         .store-ranchosanmiguel { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+        .store-costco { background: rgba(0, 93, 170, 0.25); color: #66b3ff; }
+        .store-dgmarket { background: rgba(255, 193, 7, 0.2); color: #ffd54f; }
         .deal-card .item-name {
             font-size: 0.95rem;
             font-weight: 600;
@@ -398,7 +400,7 @@
 
 <div class="hero">
     <h1>&#x1F6D2; Merced CA Grocery Deals</h1>
-    <div class="subtitle">Weekly deals compared across 13 stores in Merced, CA</div>
+    <div class="subtitle">Weekly deals compared across 15 stores in Merced, CA</div>
     <div class="date-range" id="dateRange">Sep 2 &ndash; Sep 8, 2026</div>
 </div>
 
@@ -434,6 +436,8 @@
         <button class="filter-btn" data-store="Smart & Final">Smart & Final</button>
         <button class="filter-btn" data-store="Grocery Outlet">Grocery Outlet</button>
         <button class="filter-btn" data-store="Rancho San Miguel">Rancho S.M.</button>
+        <button class="filter-btn" data-store="Costco">Costco</button>
+        <button class="filter-btn" data-store="DG Market">DG Market</button>
     </div>
 </div>
 
@@ -452,7 +456,7 @@
 
 <div class="stats-bar" id="statsBar">
     <span class="stat">Showing <strong id="dealCount">0</strong> deals</span>
-    <span class="stat">From <strong id="storeCount">13</strong> stores</span>
+    <span class="stat">From <strong id="storeCount">15</strong> stores</span>
     <span class="stat">Best price highlighted in <strong style="color: var(--accent);">green</strong></span>
 </div>
 
@@ -477,6 +481,8 @@
                     <th data-sort="Smart & Final">S&F</th>
                     <th data-sort="Grocery Outlet">G.O.</th>
                     <th data-sort="Rancho San Miguel">R.S.M.</th>
+                    <th data-sort="Costco">Costco</th>
+                    <th data-sort="DG Market">DG</th>
                     <th data-sort="best">Best &#x25B4;&#x25BE;</th>
                 </tr>
             </thead>
@@ -498,7 +504,7 @@
 </div>
 
 <div class="footer">
-    <p>Merced CA Grocery Deals &bull; Data gathered Sep 5, 2026 &bull; Prices may vary by location</p>
+    <p>Merced CA Grocery Deals &bull; Data gathered Sep 8, 2026 &bull; Prices may vary by location</p>
     <p style="margin-top: 4px;">Some prices require store loyalty cards. Always verify in-store before shopping.</p>
 </div>
 
@@ -1083,6 +1089,83 @@ const deals = [
     {item:"Jet-Puffed Marshmallows",price:1.99,unit:"12 oz",store:"Target",category:"Pantry",reg:null,note:""},
     {item:"up&up Triple-Roll Paper Towels",price:14.99,unit:"pack",store:"Target",category:"Household",reg:null,note:"Make-a-Size triple-roll"},
     {item:"Dixie Ultra Paper Plates",price:2.61,unit:"30 ct",store:"Target",category:"Household",reg:null,note:"2 for $6"},
+
+    // === COSTCO (1445 R St, Merced) — Sep 2026 coupon book, valid Aug 24 – Sep 20 ===
+    {item:"Keurig K-Cup Variety Pack",price:29.99,unit:"72 ct",store:"Costco",category:"Beverages",reg:39.99,note:"Costco book 8/24-9/20",unitPrice:0.42},
+    {item:"Kirkland Signature K-Cup Pods",price:31.99,unit:"120 ct",store:"Costco",category:"Beverages",reg:39.99,note:"Costco book 8/24-9/20",unitPrice:0.27},
+    {item:"Premier Protein Shakes",price:23.99,unit:"18 ct",store:"Costco",category:"Beverages",reg:31.99,note:"Costco book 8/24-9/20",unitPrice:1.33},
+    {item:"Alani Nu Energy Drink",price:16.99,unit:"18 ct",store:"Costco",category:"Beverages",reg:22.99,note:"Costco book 8/24-9/20",unitPrice:0.94},
+    {item:"Mars Chocolate Candy Variety Pack",price:26.49,unit:"30 ct",store:"Costco",category:"Snacks",reg:33.99,note:"Costco book 8/24-9/20",unitPrice:0.88},
+    {item:"Chomps Original Beef Sticks",price:13.99,unit:"12 ct",store:"Costco",category:"Snacks",reg:18.99,note:"Costco book 8/24-9/20",unitPrice:1.17},
+    {item:"Dino Buddies Chicken Breast Nuggets",price:10.99,unit:"5 lb",store:"Costco",category:"Frozen",reg:14.99,note:"Costco book 8/24-9/20"},
+    {item:"Kodiak Cakes Power Cakes Mix",price:8.99,unit:"4.5 lb",store:"Costco",category:"Pantry",reg:12.99,note:"Costco book 8/24-9/20"},
+    {item:"Vital Proteins Collagen Peptides",price:23.99,unit:"24 oz",store:"Costco",category:"Pantry",reg:29.99,note:"Costco book 8/24-9/20"},
+    {item:"Tide Advanced Care Liquid Detergent",price:14.99,unit:"125 loads",store:"Costco",category:"Household",reg:19.99,note:"Costco book 8/24-9/20"},
+    {item:"Gain plus Oxi Detergent",price:15.99,unit:"159 loads",store:"Costco",category:"Household",reg:19.99,note:"Costco book 8/24-9/20"},
+    {item:"Downy Unstopables Scent Beads",price:15.99,unit:"39.9 oz",store:"Costco",category:"Household",reg:19.99,note:"Costco book 8/24-9/20"},
+    {item:"Dawn Powerwash Dish Spray",price:9.99,unit:"3 ct",store:"Costco",category:"Household",reg:12.99,note:"Costco book 8/24-9/20"},
+    {item:"Mr. Clean Magic Erasers",price:10.99,unit:"18 ct",store:"Costco",category:"Household",reg:13.99,note:"Costco book 8/24-9/20"},
+    {item:"Charmin Ultra Soft Bath Tissue",price:23.99,unit:"30 rolls",store:"Costco",category:"Household",reg:29.99,note:"Costco book 8/24-9/20"},
+    {item:"Kleenex Ultra Soft Tissues",price:12.49,unit:"12 pk",store:"Costco",category:"Household",reg:16.99,note:"Costco book 8/24-9/20"},
+    {item:"Cottonelle Flushable Wipes",price:13.49,unit:"560 ct",store:"Costco",category:"Household",reg:16.99,note:"Costco book 8/24-9/20"},
+    {item:"Clorox Disinfecting Wipes",price:13.99,unit:"5 pk",store:"Costco",category:"Household",reg:17.99,note:"Costco book 8/24-9/20"},
+    {item:"Crest Complete plus Scope Toothpaste",price:10.99,unit:"5 pk",store:"Costco",category:"Household",reg:14.99,note:"Costco book 8/24-9/20"},
+    {item:"Old Spice Deodorant",price:9.99,unit:"4 pk",store:"Costco",category:"Household",reg:14.99,note:"Costco book 8/24-9/20"},
+    {item:"Olay Advanced Repair Body Wash",price:12.99,unit:"2 pk",store:"Costco",category:"Household",reg:17.99,note:"Costco book 8/24-9/20"},
+    {item:"Pampers Swaddlers Ultra Diapers",price:32.99,unit:"210 ct",store:"Costco",category:"Household",reg:42.99,note:"Costco book 8/24-9/20"},
+    {item:"Huggies Plus Diapers",price:29.99,unit:"192 ct",store:"Costco",category:"Household",reg:39.99,note:"Costco book 8/24-9/20"},
+    {item:"Gillette Custom Plus3 Razors",price:21.99,unit:"30 ct",store:"Costco",category:"Household",reg:29.99,note:"Costco book 8/24-9/20"},
+
+    // === DG MARKET (1729 W Hwy 140, Merced) — weekly ad Sep 6 – 12 ===
+    {item:"Armour Bacon",price:4.25,unit:"pkg",store:"DG Market",category:"Meat & Seafood",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Armour Cooked Ham",price:3.25,unit:"pkg",store:"DG Market",category:"Meat & Seafood",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Nestle Drumstick Cones",price:4.00,unit:"pkg",store:"DG Market",category:"Frozen",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Pillsbury Toaster Strudel",price:3.00,unit:"pkg",store:"DG Market",category:"Frozen",reg:null,note:"2/$6, DG ad 9/6-9/12"},
+    {item:"Devour Entrees or Delimex Bowls",price:3.50,unit:"11-12.8 oz",store:"DG Market",category:"Frozen",reg:null,note:"2/$7, DG ad 9/6-9/12"},
+    {item:"Gatorade",price:6.50,unit:"8 pk",store:"DG Market",category:"Beverages",reg:null,note:"2/$13, DG ad 9/6-9/12",unitPrice:0.81},
+    {item:"General Mills Gushers or Fruit Roll-Ups",price:2.50,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"2/$5, DG ad 9/6-9/12"},
+    {item:"Clover Valley Pretzels",price:2.95,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Tortilla Chips",price:2.50,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Mars Everyday Fun Size",price:1.25,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"4/$5, DG ad 9/6-9/12"},
+    {item:"Rice Krispies Treats",price:4.00,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"2/$8, DG ad 9/6-9/12"},
+    {item:"Nerds Halloween Core Mix",price:5.00,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Doritos",price:3.00,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"2/$6, DG ad 9/6-9/12"},
+    {item:"Hershey Halloween Mix Bags",price:5.00,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"2/$10, DG ad 9/6-9/12"},
+    {item:"Hershey Halloween Jumbo Bags",price:9.00,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Laffy Taffy or Now and Later",price:1.00,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Lay's Chips",price:3.50,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Little Debbie Multipacks",price:3.00,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"2/$6, DG ad 9/6-9/12"},
+    {item:"Clover Valley Cookies",price:2.25,unit:"pkg",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"CHIPS AHOY! Family Size Cookies",price:4.50,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"2/$9, DG ad 9/6-9/12"},
+    {item:"Frito-Lay Multi-pack",price:8.00,unit:"pack",store:"DG Market",category:"Snacks",reg:null,note:"final w/ coupon, DG ad 9/6-9/12"},
+    {item:"Skittles or Starburst",price:1.50,unit:"bag",store:"DG Market",category:"Snacks",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Betty Crocker Brownie Mix",price:2.00,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Kellogg's Cereal",price:3.00,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"2/$6, DG ad 9/6-9/12"},
+    {item:"Post Cereal",price:3.00,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"3/$9, DG ad 9/6-9/12"},
+    {item:"Old El Paso Taco Dinner Kits",price:3.65,unit:"kit",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Peter Pan Peanut Butter",price:3.50,unit:"jar",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Jif Peanut Butter",price:4.00,unit:"jar",store:"DG Market",category:"Pantry",reg:null,note:"2/$8, DG ad 9/6-9/12"},
+    {item:"Campbell's Chunky Soup",price:2.00,unit:"can",store:"DG Market",category:"Pantry",reg:null,note:"2/$4, DG ad 9/6-9/12"},
+    {item:"Rice-A-Roni or Pasta Roni",price:1.25,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"4/$5, DG ad 9/6-9/12"},
+    {item:"General Mills Cereal",price:2.00,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"4/$8, DG ad 9/6-9/12"},
+    {item:"Kraft Mac and Cheese",price:1.00,unit:"7.25 oz",store:"DG Market",category:"Pantry",reg:null,note:"4/$4, DG ad 9/6-9/12"},
+    {item:"Pace Salsa or Picante Sauce",price:2.50,unit:"jar",store:"DG Market",category:"Pantry",reg:null,note:"2/$5, DG ad 9/6-9/12"},
+    {item:"Clover Valley Vegetable Oil",price:1.75,unit:"48 oz",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Clover Valley Chocolate Morsels",price:3.75,unit:"bag",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Taco Shells",price:1.50,unit:"box",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Armour LunchMakers",price:1.00,unit:"pkg",store:"DG Market",category:"Pantry",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Ole Mexican Foods Tortillas",price:2.35,unit:"pkg",store:"DG Market",category:"Bakery & Deli",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"True Living Ultra Plates",price:6.25,unit:"60 ct",store:"DG Market",category:"Household",reg:null,note:"final w/ coupon, DG ad 9/6-9/12"},
+    {item:"Rubbermaid TakeAlongs Food Storage",price:5.00,unit:"set",store:"DG Market",category:"Household",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Mr. Clean Multi-Surface Cleaner",price:2.75,unit:"bottle",store:"DG Market",category:"Household",reg:null,note:"final w/ coupon, DG ad 9/6-9/12"},
+    {item:"Tide Pods or Liquid Detergent",price:12.95,unit:"57 ct",store:"DG Market",category:"Household",reg:null,note:"final w/ coupon, DG ad 9/6-9/12"},
+    {item:"Sparkle Paper Towels",price:3.00,unit:"2 rolls",store:"DG Market",category:"Household",reg:null,note:"2/$6, DG ad 9/6-9/12"},
+    {item:"Gain or Downy Fabric Softener",price:12.95,unit:"190 loads",store:"DG Market",category:"Household",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Cloralen Bleach",price:1.00,unit:"bottle",store:"DG Market",category:"Household",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Combat Ant Killing Bait",price:1.00,unit:"pkg",store:"DG Market",category:"Household",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Febreze PLUG Warmer",price:3.75,unit:"ea",store:"DG Market",category:"Household",reg:null,note:"DG ad 9/6-9/12"},
+    {item:"Huggies Snug & Dry Diapers",price:20.00,unit:"pkg",store:"DG Market",category:"Household",reg:null,note:"price w/ coupon, DG ad 9/6-9/12"},
+    {item:"Gentle Steps Diapers",price:6.00,unit:"pkg",store:"DG Market",category:"Household",reg:null,note:"2/$12, DG ad 9/6-9/12"},
 ];
 
 // ===== STORE WEEKLY-AD SOURCE LINKS =====
@@ -1100,7 +1183,9 @@ const storeSources = {
     "Sprouts": "https://shop.sprouts.com/store/sprouts/flyers/weekly",
     "Smart & Final": "https://www.smartandfinal.com/circular",
     "Grocery Outlet": "https://www.groceryoutlet.com/circulars",
-    "Rancho San Miguel": "https://ranchosanmiguelmarkets.com/store/rancho-san-miguel/flyers/weekly"
+    "Rancho San Miguel": "https://ranchosanmiguelmarkets.com/store/rancho-san-miguel/flyers/weekly",
+    "Costco": "https://www.costco.com/o/-/warehouse-savings/",
+    "DG Market": "https://www.dollargeneral.com/deals/weekly-ads"
 };
 
 // ===== BOGO EFFECTIVE-PRICE CALCULATION =====
@@ -1266,7 +1351,7 @@ function renderCompareTable() {
             });
     }
     
-    const stores = ["FoodMaxx","Food 4 Less","Walmart","Target","Save Mart","Vallarta","Whole Foods","Raley's","Cardenas","Sprouts","Smart & Final","Grocery Outlet","Rancho San Miguel"];
+    const stores = ["FoodMaxx","Food 4 Less","Walmart","Target","Save Mart","Vallarta","Whole Foods","Raley's","Cardenas","Sprouts","Smart & Final","Grocery Outlet","Rancho San Miguel","Costco","DG Market"];
     const body = document.getElementById('compareBody');
     
     body.innerHTML = multiStoreItems.map(([item, storeMap]) => {
@@ -1321,7 +1406,7 @@ function setupListeners() {
             btn.classList.add('active');
             activeStore = btn.dataset.store;
             document.getElementById('storeCount').textContent = 
-                activeStore === 'all' ? 13 : 1;
+                activeStore === 'all' ? 15 : 1;
             renderDeals();
             renderCompareTable();
         });
