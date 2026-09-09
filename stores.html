@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merced CA - Store Directory</title>
+<style>
+    :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --card2: #273449;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #4ade80;
+        --accent2: #fbbf24;
+        --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        min-height: 100vh;
+    }
+    .nav-links {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 16px 20px 0;
+        text-align: center;
+    }
+    .nav-link {
+        display: inline-block;
+        margin: 4px 8px;
+        padding: 8px 16px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: background 0.2s, transform 0.2s;
+    }
+    .nav-link:hover { background: var(--card2); transform: translateY(-1px); }
+    .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 8px;
+        text-align: center;
+    }
+    .hero h1 { font-size: 2rem; margin-bottom: 8px; }
+    .hero p { color: var(--muted); max-width: 720px; margin: 0 auto; }
+    .grid {
+        max-width: 1200px;
+        margin: 24px auto 60px;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+    }
+    .store-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: transform 0.2s, border-color 0.2s;
+    }
+    .store-card:hover { transform: translateY(-2px); border-color: rgba(74, 222, 128, 0.4); }
+    .store-card h3 { font-size: 1.15rem; color: var(--accent); }
+    .cycle {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(74, 222, 128, 0.12);
+        color: var(--accent);
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        align-self: flex-start;
+    }
+    .cycle.monthly { background: rgba(251, 191, 36, 0.12); color: var(--accent2); border-color: rgba(251, 191, 36, 0.3); }
+    .cycle.twoweek { background: rgba(96, 165, 250, 0.12); color: #60a5fa; border-color: rgba(96, 165, 250, 0.3); }
+    .cycle.sunsat { background: rgba(232, 121, 249, 0.12); color: #e879f9; border-color: rgba(232, 121, 249, 0.3); }
+    .store-card p { color: var(--muted); font-size: 0.85rem; flex: 1; }
+    .store-card a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        word-break: break-all;
+    }
+    .store-card a:hover { text-decoration: underline; }
+    .footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.8rem;
+        padding: 20px;
+    }
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 1.5rem; }
+        .grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="nav-links">
+    <a href="index.html" class="nav-link">&larr; All Deals</a>
+    <a href="compare.html" class="nav-link">&#x1F4CA; Price Comparison Table &rarr;</a>
+</div>
+
+<div class="hero">
+    <h1>&#x1F6D2; Merced CA - Store Directory</h1>
+    <p>Every store indexed on this site, with its weekly-ad link and deal cycle. Tap a store's ad link to see its current circular.</p>
+</div>
+
+<div class="grid" id="storeGrid"></div>
+
+<div class="footer">Merced CA - Weekly Grocery Deals &middot; All prices verified from store ads where possible; some flagged for in-store check.</div>
+
+<script>
+    const STORES = [
+        { name: "Walmart", url: "https://www.walmart.com/cp/food/976759", cycle: "Wed-Tue weekly", cls: "weekly", note: "CAPTCHA blocks scraping; verify prices on product pages (Walmart+ / stale-price trap)." },
+        { name: "Target", url: "https://www.target.com/weekly-ad", cycle: "Sun-Sat weekly", cls: "sunsat", note: "Ad runs Sunday to Saturday each week." },
+        { name: "Vallarta", url: "https://vallartasupermarkets.com/store-locations/merced-olive-ave/#weekly-specials", cycle: "Wed-Tue weekly", cls: "weekly", note: "Image-only ad (Flipp); prices may need in-store check." },
+        { name: "Save Mart", url: "https://shop.savemart.com/store/savemart/flyers", cycle: "Wed-Tue weekly", cls: "weekly", note: "Full text price table available; product pages for exact prices." },
+        { name: "FoodMaxx", url: "https://foodmaxx.com/flyers", cycle: "2-week ads", cls: "twoweek", note: "Runs 2-week ads (e.g., Sep 9 - Sep 22). Updated only when the 2-week window turns over." },
+        { name: "Food 4 Less", url: "https://www.food4less.com/weeklyad", cycle: "Wed-Tue weekly", cls: "weekly", note: "New ad Wednesday midnight ET." },
+        { name: "Rancho San Miguel", url: "https://ranchosanmiguelmarkets.com/store/rancho-san-miguel/flyers/weekly", cycle: "Wed-Tue weekly", cls: "weekly", note: "Full text price table available." },
+        { name: "Smart & Final", url: "https://www.smartandfinal.com/circular", cycle: "Wed-Tue weekly", cls: "weekly", note: "" },
+        { name: "Sprouts", url: "https://shop.sprouts.com/store/sprouts/flyers/weekly", cycle: "Wed-Tue weekly", cls: "weekly", note: "Image-only ad; prices may need in-store check." },
+        { name: "Whole Foods", url: "https://www.wholefoodsmarket.com/sales-flyer", cycle: "Wed-Tue weekly", cls: "weekly", note: "Prime-member pricing; verify manually." },
+        { name: "Raley's", url: "https://www.raleys.com/weekly-ad", cycle: "Wed-Tue weekly", cls: "weekly", note: "Full text price table available." },
+        { name: "Cardenas", url: "https://shop.cardenasmarkets.com/store/cardenas-marketplace/flyers/weekly", cycle: "Wed-Tue weekly", cls: "weekly", note: "Image-only ad; prices may need in-store check." },
+        { name: "Grocery Outlet", url: "https://www.groceryoutlet.com/circulars", cycle: "Wed-Tue weekly", cls: "weekly", note: "" },
+        { name: "Costco", url: "https://www.costco.com/o/-/warehouse-savings/", cycle: "Monthly coupon book", cls: "monthly", note: "Monthly coupon book (e.g., Aug 24 - Sep 20). Updated only when the book changes. Membership required." },
+        { name: "DG Market", url: "https://www.dollargeneral.com/deals/weekly-ads", cycle: "Sun-Sat weekly", cls: "sunsat", note: "Dollar General grocery format at 1729 W Hwy 140. Many prices are 'final with coupon'." }
+    ];
+
+    const grid = document.getElementById('storeGrid');
+    grid.innerHTML = STORES.map(s => `
+        <div class="store-card">
+            <h3>${s.name}</h3>
+            <span class="cycle ${s.cls}">${s.cycle}</span>
+            <p>${s.note || 'Weekly ad available.'}</p>
+            <a href="${s.url}" target="_blank" rel="noopener">View weekly ad &rarr;</a>
+        </div>
+    `).join('');
+</script>
+</body>
+</html>

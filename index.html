@@ -305,6 +305,15 @@
             color: var(--muted);
             margin-top: 6px;
         }
+        .deal-card.expanded .expand-hint {
+            color: var(--accent2);
+        }
+        .deal-card.expanded .expand-hint::after {
+            content: " \25B2 tap for less details";
+        }
+        .deal-card.expanded .expand-hint .hint-down {
+            display: none;
+        }
         @media (hover: none) {
             .deal-card .expand-hint { display: inline-block; }
         }
@@ -449,7 +458,7 @@
 
 <div class="controls">
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search any product... (typos OK — e.g. chicken, milk, eggs, Doritos)" autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Search any product... (e.g. chicken, milk, eggs, Doritos)" autocomplete="off">
     </div>
     <div class="sort-controls">
         <label>Sort by:</label>
@@ -505,6 +514,7 @@
 
 <div class="nav-links">
     <a href="compare.html" class="nav-link">&#x1F4CA; Price Comparison Table &rarr;</a>
+    <a href="stores.html" class="nav-link">&#x1F6D2; Store Directory &rarr;</a>
 </div>
 
 <div class="section-divider"></div>
@@ -1469,7 +1479,7 @@ function renderDeals() {
                 ${d.note ? `<div style="font-size:0.75rem;color:var(--accent2);margin-top:4px;">${d.note}</div>` : ''}
                 <span class="category-tag">${d.category}</span>
             </div>
-            <span class="expand-hint">&#9660; tap for details</span>
+            <span class="expand-hint"><span class="hint-down">&#9660; tap for details</span></span>
         </div>`;
     }).join('');
 }
