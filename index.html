@@ -287,6 +287,27 @@
             font-weight: 600;
             margin-left: 6px;
         }
+        /* Compact cards: extra details hidden by default, expand on hover (desktop) or tap (mobile) */
+        .deal-card .deal-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease, opacity 0.2s ease;
+        }
+        .deal-card:hover .deal-details,
+        .deal-card.expanded .deal-details {
+            max-height: 240px;
+            opacity: 1;
+        }
+        .deal-card .expand-hint {
+            display: none;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+        @media (hover: none) {
+            .deal-card .expand-hint { display: inline-block; }
+        }
         .best-price-indicator {
             position: absolute;
             top: 12px;
@@ -883,7 +904,6 @@ const deals = [
     {item:"Beef Choice Angus NY Strip Steak",price:14.80,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:16.70},
     {item:"Thin Ribeye Steak Choice Angus 2ct",price:19.29,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:21.59},
     {item:"Perdue Harvestland Free Range Chicken Breast",price:12.41,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:13.88},
-    {item:"Marketside Mild Italian Sausage 5ct",price:2.97,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:4.92},
     {item:"Great Value Frozen Jumbo Shrimp 16oz",price:9.62,unit:"ea",store:"Walmart",category:"Frozen",reg:10.97},
     {item:"Great Value Chicken Wing Sections 4lb",price:11.67,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:12.97},
     {item:"Pork Center Cut Loin Chops 6ct",price:13.61,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:16.14},
@@ -891,11 +911,11 @@ const deals = [
     {item:"85% Lean Angus Ground Beef Burgers 12ct",price:24.97,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:27.97,unitPrice:2.08},
     {item:"Fresh Strawberries 1lb",price:2.66,unit:"ea",store:"Walmart",category:"Produce",reg:null},
     {item:"Fresh Bananas",price:0.20,unit:"ea",store:"Walmart",category:"Produce",reg:null,note:"50¢/lb"},
-    {item:"Fresh Hass Avocados",price:0.56,unit:"ea",store:"Walmart",category:"Produce",reg:0.77,note:"Rollback"},
+    {item:"Fresh Hass Avocados",price:0.56,unit:"ea",store:"Walmart",category:"Produce",reg:0.82,note:"Rollback"},
     {item:"Fresh Roma Tomatoes",price:0.23,unit:"ea",store:"Walmart",category:"Produce",reg:null,note:"92¢/lb"},
     {item:"Fresh Cucumbers",price:0.72,unit:"ea",store:"Walmart",category:"Produce",reg:null},
     {item:"Fresh Whole Russet Potatoes 5 lb",price:2.47,unit:"bag",store:"Walmart",category:"Produce",reg:null,note:"Rollback, 49¢/lb"},
-    {item:"Great Value Large White Eggs 18ct",price:2.92,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null,unitPrice:0.16},
+    {item:"Great Value Large White Eggs 18ct",price:2.17,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null,unitPrice:0.12,source:"https://www.walmart.com/ip/Great-Value-Large-White-Eggs-18-Count/172844767"},
     {item:"Fresh Green Onions",price:0.96,unit:"bunch",store:"Walmart",category:"Produce",reg:null},
     {item:"Fresh Lemons",price:0.68,unit:"ea",store:"Walmart",category:"Produce",reg:null},
     {item:"Great Value Evaporated Milk 12oz",price:1.00,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null},
@@ -1287,6 +1307,19 @@ const storeSources = {
     "DG Market": "https://www.dollargeneral.com/deals/weekly-ads"
 };
 
+// Deep-link: per-item search URL for stores with product search, so clicking an item
+// lands on that item instead of a generic ad page. Falls back to the store ad URL.
+function searchUrlFor(store, item) {
+    const q = encodeURIComponent(item);
+    switch (store) {
+        case "Walmart": return `https://www.walmart.com/search?q=${q}`;
+        case "Target": return `https://www.target.com/s?searchTerm=${q}`;
+        case "Costco": return `https://www.costco.com/search?keyword=${q}`;
+        case "DG Market": return `https://www.dollargeneral.com/search?q=${q}`;
+        default: return null;
+    }
+}
+
 // ===== BOGO EFFECTIVE-PRICE CALCULATION =====
 // BOGO deals: the effective per-unit price when you take advantage of the offer.
 // FREE / SUPER = buy 1 get 1 free -> half price. "50" = B1G1 50% off -> 75%. etc.
@@ -1365,7 +1398,7 @@ function renderDeals() {
         const comparePrice = getEffectivePrice(d) ?? (d.unitPrice != null ? d.unitPrice : d.price);
         const isCheapest = isCheapestAtStore(d.item, d.store, comparePrice);
         const effPrice = getEffectivePrice(d);
-        const linkUrl = d.source || storeSources[d.store] || '#';
+        const linkUrl = d.source || searchUrlFor(d.store, d.item) || storeSources[d.store] || '#';
         const itemHtml = linkUrl !== '#'
             ? `<a class="item-link" href="${linkUrl}" target="_blank" rel="noopener" title="View in ${d.store} weekly ad">${highlightSearch(d.item)}</a>`
             : `<div class="item-name">${highlightSearch(d.item)}</div>`;
@@ -1377,13 +1410,18 @@ function renderDeals() {
             <div class="price-row">
                 <span class="sale-price">$${d.price.toFixed(2)}</span>
                 ${d.unit ? `<span style="color:var(--muted);font-size:0.8rem;">${d.unit}</span>` : ''}
-                ${d.unitPrice != null ? `<span style="color:var(--accent2);font-size:0.75rem;">$${d.unitPrice.toFixed(2)}/unit</span>` : ''}
-                ${d.reg ? `<span class="reg-price">$${d.reg.toFixed(2)}</span>` : ''}
-                ${savings ? `<span class="savings">Save ${savings}%</span>` : ''}
             </div>
-            ${effPrice != null ? `<div class="bogo-line">BOGO &#x2192; $${effPrice.toFixed(2)}${d.unit || ''} effective</div>` : ''}
-            ${d.note ? `<div style="font-size:0.75rem;color:var(--accent2);margin-top:4px;">${d.note}</div>` : ''}
-            <span class="category-tag">${d.category}</span>
+            <div class="deal-details">
+                <div class="price-row" style="margin-top:4px;">
+                    ${d.unitPrice != null ? `<span style="color:var(--accent2);font-size:0.75rem;">$${d.unitPrice.toFixed(2)}/unit</span>` : ''}
+                    ${d.reg ? `<span class="reg-price">$${d.reg.toFixed(2)}</span>` : ''}
+                    ${savings ? `<span class="savings">Save ${savings}%</span>` : ''}
+                </div>
+                ${effPrice != null ? `<div class="bogo-line">BOGO &#x2192; $${effPrice.toFixed(2)}${d.unit || ''} effective</div>` : ''}
+                ${d.note ? `<div style="font-size:0.75rem;color:var(--accent2);margin-top:4px;">${d.note}</div>` : ''}
+                <span class="category-tag">${d.category}</span>
+            </div>
+            <span class="expand-hint">&#9660; tap for details</span>
         </div>`;
     }).join('');
 }
@@ -1475,7 +1513,7 @@ function renderCompareTable() {
         // Link the item name to the cheapest store's ad (or first store's ad)
         const cheapestEntry = Object.values(storeMap).sort((a,b) =>
             (getEffectivePrice(a) ?? (a.unitPrice != null ? a.unitPrice : a.price)) - (getEffectivePrice(b) ?? (b.unitPrice != null ? b.unitPrice : b.price)))[0];
-        const linkUrl = cheapestEntry.source || storeSources[cheapestEntry.store] || '#';
+        const linkUrl = cheapestEntry.source || searchUrlFor(cheapestEntry.store, cheapestEntry.item) || storeSources[cheapestEntry.store] || '#';
         const itemHtml = linkUrl !== '#'
             ? `<a class="item-link" href="${linkUrl}" target="_blank" rel="noopener" title="View in ${cheapestEntry.store} weekly ad">${item}</a>`
             : item;
@@ -1519,6 +1557,14 @@ function setupListeners() {
             renderDeals();
             renderCompareTable();
         });
+    });
+    
+    // Tap/click a card to expand details (mobile); item links still open normally
+    document.getElementById('dealsGrid').addEventListener('click', e => {
+        const card = e.target.closest('.deal-card');
+        if (!card) return;
+        if (e.target.closest('a')) return;
+        card.classList.toggle('expanded');
     });
     
     // Table header sorting
