@@ -150,12 +150,12 @@
 
 <div class="hero">
     <h1>&#x1F6D2; Merced CA - Store Directory</h1>
-    <p>Every store indexed on this site, with its weekly-ad link and deal cycle. Tap a store's ad link to see its current circular.</p>
+    <p>Every store indexed on this site, with its current-deals link and deal cycle. Tap a store's link to see its current circular.</p>
 </div>
 
 <div class="grid" id="storeGrid"></div>
 
-<div class="footer">Merced CA - Weekly Grocery Deals &middot; All prices verified from store ads where possible; some flagged for in-store check.</div>
+<div class="footer">Merced CA - Current Grocery Deals &middot; All prices verified from store ads where possible; some flagged for in-store check.</div>
 
 <script>
     const STORES = [
@@ -181,8 +181,8 @@
         <div class="store-card">
             <h3>${s.name}</h3>
             <span class="cycle ${s.cls}">${s.cycle}</span>
-            <p>${s.note || 'Weekly ad available.'}</p>
-            <a href="${s.url}" target="_blank" rel="noopener">View weekly ad &rarr;</a>
+            <p>${s.note || 'Current deals available.'}</p>
+            <a href="${s.url}" target="_blank" rel="noopener">View current deals &rarr;</a>
         </div>
     `).join('');
 </script>
