@@ -572,7 +572,7 @@
 <script>
 const deals = [
     // === PRODUCE ===
-    // -- FoodMaxx (prices from prior ad Aug 26 - Sep 8; new 2-week window Sep 9 - Sep 22 pending verification) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new 2-week window Sep 9-22 CONFIRMED, prices not yet published - needs in-store check) --
     {item:"Yellow Peaches or Nectarines",price:1.88,unit:"/lb",store:"FoodMaxx",category:"Produce",reg:null},
     {item:"Green or Red Seedless Grapes",price:1.88,unit:"/lb",store:"FoodMaxx",category:"Produce",reg:null},
     {item:"Medium Avocados",price:0.69,unit:"ea",store:"FoodMaxx",category:"Produce",reg:null},
@@ -603,50 +603,52 @@ const deals = [
     {item:"Organic Strawberries",price:4.99,unit:"/lb",store:"Save Mart",category:"Produce",reg:null},
     {item:"Broccoli Crowns",price:2.99,unit:"/lb",store:"Save Mart",category:"Produce",reg:null},
     {item:"Taylor Farms Chopped Salad Kits",price:2.50,unit:"ea",store:"Save Mart",category:"Produce",reg:null,note:"2/$5"},
-    // -- Vallarta (UNCHANGED - image-only, keeping existing) --
+// -- Vallarta (new ad Sep 9-15 expected but not yet posted; keeping prior items flagged) --
     {item:"Roma Tomatoes",price:0.88,unit:"/lb",store:"Vallarta",category:"Produce",reg:null,note:"unverified, needs in-store check"},
     {item:"Whole Cantaloupes",price:0.33,unit:"lb",store:"Vallarta",category:"Produce",reg:null,note:"3 lbs/$1; unverified, needs in-store check"},
     {item:"Iceberg Lettuce",price:0.99,unit:"ea",store:"Vallarta",category:"Produce",reg:null,note:"unverified, needs in-store check"},
     {item:"Red Flesh Dragon Fruit",price:5.99,unit:"/lb",store:"Vallarta",category:"Produce",reg:null,note:"unverified, needs in-store check"},
-    // -- Cardenas (UNCHANGED - image-only, keeping existing) --
-    {item:"Green or Red Cactus Pears",price:0.40,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"5/$2"},
-    {item:"Mexican Papaya",price:0.79,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Seedless Watermelon",price:0.33,unit:"lb",store:"Cardenas",category:"Produce",reg:null,note:"3 lbs/$0.99"},
-    {item:"Loose Beets",price:0.99,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Sweet Pineapple",price:0.79,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Jumbo Mango",price:1.67,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"3/$5"},
-    {item:"Sweet Cantaloupe or Honeydew",price:0.33,unit:"lb",store:"Cardenas",category:"Produce",reg:null,note:"3 lbs/$0.99"},
-    {item:"Iceberg Lettuce",price:0.50,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"2/$0.99"},
-    {item:"Pasilla Peppers",price:0.99,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Green Tomatillos",price:0.99,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Roma Tomatoes",price:0.99,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    {item:"Melón Chino",price:0.39,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
-    // -- Whole Foods (UNCHANGED - Sep 2-8 ad, Sep 9-15 not yet loaded) --
-    {item:"Organic Black/Red/Green Seedless Grapes",price:2.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:4.69,note:"Prime price"},
-    {item:"Organic Honeycrisp Apples",price:3.49,unit:"/lb",store:"Whole Foods",category:"Produce",reg:3.99,note:"Prime price"},
-    {item:"Broccoli",price:1.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:2.69,note:"Prime price"},
-    {item:"Organic Zucchini",price:2.49,unit:"/lb",store:"Whole Foods",category:"Produce",reg:3.29,note:"Prime price"},
-    {item:"Organic English Cucumbers",price:2.49,unit:"ea",store:"Whole Foods",category:"Produce",reg:3.19,note:"Prime price"},
-    {item:"Organic Blackberries or Raspberries 6oz",price:3.50,unit:"ea",store:"Whole Foods",category:"Produce",reg:4.99,note:"2 for $7, Prime"},
-    {item:"Red Cherries",price:5.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:6.99,note:"Prime price"},
-    {item:"Bagged Mandarins 48oz",price:4.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:5.99,note:"Prime price"},
-    {item:"Organic Nectarines",price:3.49,unit:"/lb",store:"Whole Foods",category:"Produce",reg:5.49,note:"Prime price"},
-    {item:"Organic Golden Kiwis 16oz",price:5.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:6.99,note:"Prime price"},
-    {item:"Organic Bagged Pink Cripps Apples 48oz",price:5.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:7.99,note:"Prime price"},
-    {item:"Cut Cantaloupe",price:5.39,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"20% off, Prime"},
-    {item:"Mixed Berries",price:9.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"20% off, Prime"},
-    // -- Raley's (UNCHANGED - image-only ad) --
-    {item:"Broccoli Crowns",price:2.99,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
-    {item:"Tomato on the Vine",price:4.39,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
-    {item:"Fuji, Gala or California Modi Apples",price:1.99,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
-    {item:"Navel or Cara Cara Oranges or Daisy Mandarins",price:2.49,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
-    {item:"Personal Size Watermelon or Honeydew or Cantaloupe Melon",price:2.97,unit:"ea",store:"Raley's",category:"Produce",reg:null},
-    {item:"Sweet Corn",price:0.33,unit:"ea",store:"Raley's",category:"Produce",reg:null,note:"3 for 99\u00a2"},
-    {item:"Organic Living Butter Lettuce",price:3.00,unit:"ea",store:"Raley's",category:"Produce",reg:null,note:"2 for $6"},
-    {item:"Raley's Baby or Medley Potatoes",price:2.99,unit:"ea",store:"Raley's",category:"Produce",reg:null},
-    {item:"Row 7 Organic Sweet Prince Tomatoes",price:4.99,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
-    {item:"Fresh Express Salad Kit or Taylor Farms Chopped Salad",price:3.99,unit:"ea",store:"Raley's",category:"Produce",reg:null},
-    {item:"Fresh Berries",price:3.99,unit:"ea",store:"Raley's",category:"Produce",reg:null,note:"B1G1 FREE \u2014 price unverified, needs in-store check",bogo:"FREE"},
+    // -- Cardenas (UPDATED Sep 9-15) --
+    {item:"Large Avocados",price:1.00,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"4 for $4"},
+    {item:"Seedless Watermelon",price:0.39,unit:"lb",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Sweet Pineapple",price:0.79,unit:"ea",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Valencia Oranges",price:1.99,unit:"bag",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Cantaloupe",price:0.39,unit:"lb",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Papaya",price:0.99,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Bananas or Yuca",price:0.79,unit:"/lb",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Celery",price:0.59,unit:"ea",store:"Cardenas",category:"Produce",reg:null},
+    {item:"Gala Apples",price:2.00,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"2 for $4"},
+    {item:"Cucumbers",price:2.50,unit:"ea",store:"Cardenas",category:"Produce",reg:null,note:"2 for $5"},
+    {item:"Romaine Lettuce",price:1.00,unit:"ea",store:"Cardenas",category:"Produce",reg:null},
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Seedless Red or Green Grapes",price:2.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Honeycrisp Apples",price:3.49,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Gala Apples",price:1.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null},
+    {item:"Yellow Peaches",price:3.49,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null},
+    {item:"Bagged Hass Avocados 4ct",price:4.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Medium Hass Avocados",price:0.69,unit:"ea",store:"Whole Foods",category:"Produce",reg:null},
+    {item:"Blackberries or Red Raspberries 6oz",price:3.50,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"2 for $7, Prime"},
+    {item:"Baby Broccolini Bunch",price:3.00,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"2 for $6, Prime"},
+    {item:"Cauliflower",price:3.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Cherry Tomato Open Pints",price:3.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Heirloom Tomatoes",price:3.99,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Mini Cucumbers 16oz",price:3.79,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"365 Organic Creamer or Mixed Fingerling Potatoes 24oz",price:4.49,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Zespri Organic Green Kiwis 16oz",price:4.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"organicgirl Organic Spinach and Salad Mixes 10oz",price:5.49,unit:"ea",store:"Whole Foods",category:"Produce",reg:null,note:"Prime price"},
+    {item:"Organic Corn 4ct",price:4.99,unit:"ea",store:"Whole Foods",category:"Produce",reg:null},
+    {item:"Cut Watermelon Chunks",price:5.09,unit:"/lb",store:"Whole Foods",category:"Produce",reg:null,note:"11% off, Prime"},
+    // -- Raley's (UPDATED Sep 9-15) --
+    {item:"Fresh Berries",price:2.99,unit:"ea",store:"Raley's",category:"Produce",reg:null},
+    {item:"Green, Black or Red Seedless Grapes",price:2.99,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
+    {item:"Hass Avocados",price:0.97,unit:"ea",store:"Raley's",category:"Produce",reg:null},
+    {item:"Honeycrisp or Envy Apples",price:2.47,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
+    {item:"Yellow Peaches, White Donut Peaches or Red Plumcots",price:2.99,unit:"/lb",store:"Raley's",category:"Produce",reg:null},
+    {item:"NatureSweet Cherub Tomatoes",price:3.50,unit:"bag",store:"Raley's",category:"Produce",reg:null,note:"2 for $7"},
+    {item:"Organicgirl Salad Greens",price:3.50,unit:"bag",store:"Raley's",category:"Produce",reg:null,note:"2 for $7"},
+    {item:"Raley's 5-lb Bag Idaho Potatoes",price:2.50,unit:"bag",store:"Raley's",category:"Produce",reg:null,note:"2 for $5"},
+    {item:"Raley's Fresh Celery or Baby-Cut Carrots",price:2.49,unit:"ea",store:"Raley's",category:"Produce",reg:null},
+    {item:"Raley's 5-Count Corn Bread or Nob Hill Trading Co. Sourdough Soup Bowl",price:2.50,unit:"ea",store:"Raley's",category:"Produce",reg:null,note:"2 for $5"},
     // -- Sprouts (UNCHANGED - image-only BOGO sale) --
     {item:"All Berries Mix & Match",price:3.99,unit:"ea",store:"Sprouts",category:"Produce",reg:null,note:"Buy 1 Get 1 50% Off; unverified, needs in-store check",bogo:"50"},
     {item:"Organic Yellow Peaches or Nectarines 4ct",price:3.99,unit:"ea",store:"Sprouts",category:"Produce",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
@@ -661,15 +663,14 @@ const deals = [
     {item:"Organic Blackberries",price:4.99,unit:"ea",store:"Sprouts",category:"Produce",reg:null,note:"Buy 1 Get 1 50% Off; unverified, needs in-store check",bogo:"50"},
     {item:"Sweet Corn",price:0.33,unit:"ea",store:"Sprouts",category:"Produce",reg:null,note:"unverified, needs in-store check"},
     {item:"Organic Sweet Potatoes",price:4.00,unit:"ea",store:"Sprouts",category:"Produce",reg:null,note:"unverified, needs in-store check"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"Seedless Watermelon",price:3.88,unit:"ea",store:"Smart & Final",category:"Produce",reg:null},
-    {item:"Green or Red Seedless Grapes",price:1.77,unit:"/lb",store:"Smart & Final",category:"Produce",reg:null},
-    {item:"Yellow Peaches",price:1.99,unit:"/lb",store:"Smart & Final",category:"Produce",reg:null},
-    {item:"White Corn",price:1.00,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"3/$3"},
-    {item:"Limes",price:0.33,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"3/$0.99"},
-    {item:"Small Hass Avocados",price:0.50,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"2/$1"},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Mini Seedless Watermelons",price:2.50,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"2 for $5"},
+    {item:"Jumbo Hass Avocados",price:1.50,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"2 for $3"},
     {item:"White Onions",price:0.69,unit:"lb",store:"Smart & Final",category:"Produce",reg:null},
-    {item:"Russet Potatoes",price:0.88,unit:"/lb",store:"Smart & Final",category:"Produce",reg:null},
+    {item:"Jalape\u00f1os",price:0.99,unit:"lb",store:"Smart & Final",category:"Produce",reg:null},
+    {item:"Cilantro",price:0.49,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"2 for 98\u00a2"},
+    {item:"Limes",price:0.33,unit:"ea",store:"Smart & Final",category:"Produce",reg:null,note:"3 for 99\u00a2"},
+    {item:"California-Style Street Corn Kit",price:7.99,unit:"ea",store:"Smart & Final",category:"Produce",reg:null},
     // -- Rancho San Miguel (UPDATED Sep 9-15) --
     {item:"Gala Apples",price:0.79,unit:"/lb",store:"Rancho San Miguel",category:"Produce",reg:null},
     {item:"Jalapeño Peppers",price:0.50,unit:"ea",store:"Rancho San Miguel",category:"Produce",reg:null,note:"2 lbs/$1"},
@@ -703,12 +704,12 @@ const deals = [
     {item:"Fresh Bananas",price:0.20,unit:"ea",store:"Walmart",category:"Produce",reg:null,note:"50\u00a2/lb"},
     {item:"Fresh Roma Tomatoes",price:0.23,unit:"ea",store:"Walmart",category:"Produce",reg:null,note:"92\u00a2/lb"},
     {item:"Fresh Strawberries 1 lb",price:2.66,unit:"ea",store:"Walmart",category:"Produce",reg:null},
-    // -- Target (Sep 7-13, keeping existing) --
+    // -- Target (Sep 6-12, keeping existing) --
     {item:"Fresh Watermelon",price:4.99,unit:"ea",store:"Target",category:"Produce",reg:null,note:"whole watermelon"},
     {item:"Fresh Strawberries",price:2.49,unit:"1 lb",store:"Target",category:"Produce",reg:null,note:"excludes organic"},
 
     // === MEAT & SEAFOOD ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Beef Tri-Tip Roast",price:5.99,unit:"/lb",store:"FoodMaxx",category:"Meat & Seafood",reg:null},
     {item:"Fresh Chicken Wings",price:1.99,unit:"/lb",store:"FoodMaxx",category:"Meat & Seafood",reg:null},
     {item:"Bar-S Classic Franks",price:0.99,unit:"pkg",store:"FoodMaxx",category:"Meat & Seafood",reg:null},
@@ -735,59 +736,71 @@ const deals = [
     {item:"Tyson Chicken Strips or Bites",price:9.99,unit:"ea",store:"Save Mart",category:"Meat & Seafood",reg:null,note:"Frozen 20-25 oz"},
     {item:"Verlasso Fresh Atlantic Salmon Whole Fillet",price:9.99,unit:"/lb",store:"Save Mart",category:"Meat & Seafood",reg:null},
     {item:"Cooked Shrimp 41/50 ct",price:8.99,unit:"/lb",store:"Save Mart",category:"Meat & Seafood",reg:null,note:"sold in 2 lb bag"},
-    // -- Vallarta (UNCHANGED) --
+// -- Vallarta (UNCHANGED) --
     {item:"Fresh Pork Spare Ribs",price:4.49,unit:"/lb",store:"Vallarta",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
     {item:"Fresh Beef Tri Tip Steak/Roast",price:5.99,unit:"/lb",store:"Vallarta",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    // -- Cardenas (UNCHANGED) --
-    {item:"Boneless Chicken Breast",price:2.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    {item:"Beef Shoulder Clod Steak",price:5.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    {item:"Swai Fish Fillet",price:3.49,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    {item:"Headless White Shrimp 36/40",price:5.49,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    {item:"Fresh Guacamole",price:7.99,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    {item:"Beef T-Bone Steak",price:5.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"Sustainable Wild Caught King Salmon",price:23.99,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:29.99,note:"20% off, Prime"},
-    {item:"Organic Chicken Breast",price:7.64,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:8.99,note:"15% off, Prime"},
-    {item:"Niman Ranch Pork/Bacon/Pulled Pork",price:5.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:9.99,note:"25% off, Prime"},
-    {item:"Lobster Tails",price:8.79,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:10.99,note:"20% off, Prime"},
-    {item:"Bilinski's Chicken Sausage",price:6.15,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:8.29,note:"25% off, Prime"},
-    {item:"No-Antibiotics-Ever Bone-In Beef Ribeye Steaks",price:16.99,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:21.99,note:"20% off, Prime"},
-    {item:"Lobster Grillers & Shrimp Skewers",price:11.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:15.99,note:"25% off, Prime"},
-    {item:"Changing Seas Cold Smoked Salmon 4-8oz",price:11.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:14.99,note:"20% off, Prime"},
-    // -- Raley's (UNCHANGED) --
-    {item:"Raley's Chicken Breasts Club Pack",price:6.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null,note:"Foster Farms Simply Raised, no antibiotics"},
-    {item:"Foster Farms Split Chicken Breasts",price:1.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
+    // -- Cardenas (UPDATED Sep 9-15) --
+    {item:"Beef Shoulder",price:5.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Beef Ribs or Strips",price:7.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Ranchera Beef",price:9.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Whole Beef Shank",price:4.49,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Smoked Pork Loin Chops",price:2.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Pork Shoulder",price:3.29,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Pork Chorizo",price:4.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Boneless Chicken Breast Fillets",price:3.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Ranch Chicken",price:3.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Whole Chicken Family Pack",price:19.99,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Chicken Family Box",price:20.00,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Tilapia or Swai Fillets",price:3.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Headless Shrimp or Ceviche-Cut Shrimp",price:5.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Raw Octopus",price:6.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Fresh Salmon Fillets",price:8.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"Whole Mojarra",price:2.49,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null},
+    {item:"8-Piece Chicken",price:7.99,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null,note:"deli"},
+    {item:"Grilled Whole Chicken",price:7.99,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null,note:"deli"},
+    {item:"Carnitas",price:7.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null,note:"deli"},
+    {item:"Northern-Style Barbacoa",price:9.99,unit:"/lb",store:"Cardenas",category:"Meat & Seafood",reg:null,note:"deli"},
+    {item:"Tacos",price:1.25,unit:"ea",store:"Cardenas",category:"Meat & Seafood",reg:null,note:"deli"},
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Organic Rancher 85% Lean Ground Beef 16oz",price:9.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:null},
+    {item:"Air-Chilled Organic Whole Chicken",price:4.49,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"11% off"},
+    {item:"Fresh Atlantic Salmon Fillets",price:15.99,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"5% off"},
+    {item:"Seasoned or Marinated Atlantic Salmon Fillets",price:16.99,unit:"/lb",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"11% off"},
+    {item:"City Pier Grilled Shrimp with Sauce 10oz",price:16.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:null},
+    {item:"True Story Sausages, Hot Dogs or Charcuterie",price:5.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"select varieties"},
+    {item:"Teton Waters Ranch Beef Burgers, Meatballs or Sausages",price:6.49,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"select varieties"},
+    {item:"Kevin's Sous Vide Meals",price:11.99,unit:"ea",store:"Whole Foods",category:"Meat & Seafood",reg:null,note:"22% off"},
+    // -- Raley's (UPDATED Sep 9-15) --
+    {item:"Jennie-O Fresh Ground Turkey",price:3.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Raley's Untrimmed Tri Tip Roast",price:6.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
     {item:"Foster Farms Fresh Chicken Leg Quarters",price:0.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Raley's New York Steak",price:9.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Fresh Coho Salmon Fillets",price:10.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Ahi Tuna or Swordfish Steak",price:5.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Fresh BBQ Oysters",price:1.00,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null,note:"10 for $10"},
-    {item:"Hatfield Dry Rubbed Pork",price:6.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Foster Farms Simply Raised Boneless Skinless Chicken Breasts",price:6.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
     {item:"Nature Raised Farms Chicken",price:9.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Coleman Natural St. Louis Style Pork Spareribs",price:2.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Raley's Raw EZ Peel Medium Shrimp",price:5.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Pork Shoulder Roast Bone-In",price:4.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
-    {item:"Jimmy Dean Smoked Premium Bacon",price:4.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null,note:"12 oz, limit 4"},
-    {item:"Johnsonville Bratwurst or Italian Sausage Links",price:2.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null,note:"19 oz, limit 4"},
-    {item:"Ball Park Franks",price:2.49,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
-    // -- Sprouts (UNCHANGED) --
-    {item:"Goodness Grazecious Grass-Fed Ground Beef",price:6.99,unit:"ea",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"Buy 1 Get 1 50% Off; unverified, needs in-store check",bogo:"50"},
-    {item:"Alaskan Leader Sockeye Salmon",price:15.99,unit:"ea",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    {item:"Argentine Shrimp",price:11.99,unit:"ea",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    {item:"Sprouts Ground Beef",price:9.49,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    {item:"NZ Ground Lamb",price:9.99,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    {item:"Mahi Mahi",price:8.99,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null,note:"unverified, needs in-store check"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"First Street Boneless Skinless Breasts",price:2.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"First Street Fresh Pork Shoulder Roast",price:2.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"First Street Pork Spareribs",price:1.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"First Street Jumbo Shrimp",price:7.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:11.99},
-    {item:"First Street 80/20 Ground Beef Chuck Patties",price:4.49,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:5.99},
-    {item:"First Street 80/20 Ground Beef Chuck 40 lb box",price:4.00,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"Beef Loin Flap Meat",price:8.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"Hoffy Franks",price:8.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"First Street Party Wings",price:19.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
-    {item:"Tilapia",price:3.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Ahi Tuna or Swordfish Steak",price:5.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Cooked Dungeness Crab",price:12.99,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Fresh Coho Salmon Fillets",price:8.97,unit:"/lb",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Fresh BBQ Oysters",price:1.00,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null,note:"10 for $10"},
+    {item:"Johnsonville Bratwurst or Italian Sausage Links",price:5.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Schweid & Sons Signature Blend Smashburgers",price:9.99,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null},
+    {item:"Reser's Main St. Bistro Sides",price:3.00,unit:"ea",store:"Raley's",category:"Meat & Seafood",reg:null,note:"2 for $6"},
+    // -- Sprouts (UPDATED Sep 9-15) --
+    {item:"Sprouts Ground Beef (Grass-Fed 85% or Grain-Fed 93% Lean)",price:9.49,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null},
+    {item:"NZ 100% Grass-Fed Ground Lamb",price:9.99,unit:"16 oz",store:"Sprouts",category:"Meat & Seafood",reg:null},
+    {item:"Wild Pat Wild-Caught Peeled & Deveined Raw Red Argentine Shrimp",price:11.99,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null},
+    {item:"Sprouts Wild-Caught Mahi Mahi Fillets",price:8.99,unit:"/lb",store:"Sprouts",category:"Meat & Seafood",reg:null},
+    {item:"Godshall's All Items",price:7.99,unit:"ea",store:"Sprouts",category:"Meat & Seafood",reg:null},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Foster Farms Whole Chickens",price:0.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"First Street Chicken Half Breasts with Ribs",price:1.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Pork Shoulder Picnic Roast",price:1.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"First Street Ground Turkey",price:3.33,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Boneless Beef Eye of Round Roast",price:5.39,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Angus Brisket Short Rib or Tri-Tip Blend Patties",price:10.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"First Street Shrimp",price:7.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Great American Frozen Tilapia Fillets",price:3.99,unit:"/lb",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"First Street Sliced Bacon",price:4.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Smoked Sausage",price:5.00,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
+    {item:"Chicken Breast Tenderloins or Breaded Chicken Tenders",price:11.99,unit:"ea",store:"Smart & Final",category:"Meat & Seafood",reg:null},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Boneless Chicken Breast",price:2.49,unit:"/lb",store:"Rancho San Miguel",category:"Meat & Seafood",reg:null},
     {item:"Boneless Chicken Thighs",price:2.49,unit:"/lb",store:"Rancho San Miguel",category:"Meat & Seafood",reg:null},
@@ -821,7 +834,7 @@ const deals = [
     {item:"Jennie-O Fresh Lean Ground Turkey 93% 16oz",price:4.93,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:5.48,note:"Rollback"},
     {item:"Great Value Boneless Skinless Chicken Breasts 3 lb Frozen",price:8.94,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:9.94,note:"Rollback"},
     {item:"Freshness Guaranteed Chicken Breasts",price:10.35,unit:"ea",store:"Walmart",category:"Meat & Seafood",reg:11.92,note:"Rollback, avg $2.23/lb"},
-    // -- Target (Sep 7-13, keeping existing) --
+    // -- Target (Sep 6-12, keeping existing) --
     {item:"Oscar Mayer Wieners",price:2.38,unit:"10 ct",store:"Target",category:"Meat & Seafood",reg:null,note:"2 for $5"},
     {item:"Good & Gather Pork Ribs",price:3.49,unit:"lb",store:"Target",category:"Meat & Seafood",reg:null,note:"per pound"},
     // -- DG Market (UNCHANGED) --
@@ -829,7 +842,7 @@ const deals = [
     {item:"Armour Cooked Ham",price:3.25,unit:"pkg",store:"DG Market",category:"Meat & Seafood",reg:null,note:"DG ad 9/6-9/12"},
 
     // === DAIRY & EGGS ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Sunnyside Farms Shredded Cheese",price:6.99,unit:"ea",store:"FoodMaxx",category:"Dairy & Eggs",reg:null,note:"32 oz, select varieties"},
     // -- Food 4 Less (UPDATED) --
     {item:"60 ct Kroger Cage Free Eggs",price:8.99,unit:"ct",store:"Food 4 Less",category:"Dairy & Eggs",reg:null},
@@ -839,42 +852,35 @@ const deals = [
     {item:"Sunnyside Farms Stick or Spreadable Butter",price:3.49,unit:"ea",store:"Save Mart",category:"Dairy & Eggs",reg:null,note:"15-16 oz"},
     {item:"Pete & Gerry's Pasture Raised Eggs",price:5.99,unit:"dozen",store:"Save Mart",category:"Dairy & Eggs",reg:null},
     {item:"Chobani 20G Protein Flip Yogurt",price:2.00,unit:"ea",store:"Save Mart",category:"Dairy & Eggs",reg:null,note:"2/$4, 6 oz"},
-    // -- Vallarta (UNCHANGED) --
+// -- Vallarta (UNCHANGED) --
     {item:"Alta Dena or Lala Milk",price:2.50,unit:"ea",store:"Vallarta",category:"Dairy & Eggs",reg:null,note:"2/$5; unverified, needs in-store check"},
     {item:"Joseph Farms Cheese Shredded/Block",price:6.99,unit:"ea",store:"Vallarta",category:"Dairy & Eggs",reg:null,note:"unverified, needs in-store check"},
     {item:"Joseph Farms Cheese",price:3.99,unit:"ea",store:"Vallarta",category:"Dairy & Eggs",reg:null,note:"unverified, needs in-store check"},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"Vital Farms Eggs/Butter/Hard-Boiled",price:5.94,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:8.49,note:"30% off, Prime"},
-    {item:"Noosa Yogurt",price:2.00,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:2.99,note:"2 for $4, Prime"},
-    {item:"Silk Soy Milk & Creamer 32-64oz",price:4.12,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:5.49,note:"25% off, Prime"},
-    {item:"Organic Valley Sliced Cheese 6oz",price:5.62,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:7.69,note:"25% off, Prime"},
-    {item:"Stonyfield Organic Yogurt",price:3.77,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:5.39,note:"30% off, Prime"},
-    {item:"Too Good & Co. Coffee Creamer",price:4.49,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:5.99,note:"25% off, Prime"},
-    // -- Raley's (UNCHANGED) --
-    {item:"Raley's Shredded or Sliced Cheese",price:2.49,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Coffeemate Creamer or Cold Foam Creamer",price:2.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Vital Farms Organic Pasture-Raised Eggs",price:8.99,unit:"dozen",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Kerrygold Cheese Bars, Snack Sticks or Sliced 6-7oz",price:8.49,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:null},
+    {item:"Marin French Petite Cheeses 4oz",price:7.99,unit:"ea",store:"Whole Foods",category:"Dairy & Eggs",reg:null},
+    // -- Raley's (UPDATED Sep 9-15) --
+    {item:"Danish Creamery or Challenge Butter",price:3.99,unit:"/lb",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    {item:"Raley's Shredded Cheese",price:6.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
     {item:"Philadelphia Cream Cheese",price:3.49,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Oscar Mayer Family Pack Deli Fresh Lunch Meat",price:6.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Chobani Flip Yogurt",price:2.59,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Chobani Protein Yogurt",price:2.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
-    {item:"Raley's Butter",price:5.98,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:6.29},
-    {item:"Sargento Snack Sticks or Oscar Mayer Deli Fresh LM Meat",price:4.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null,note:"Sargento 12-count or Oscar Mayer 10oz"},
-    // -- Cardenas (UNCHANGED) --
-    {item:"Large Eggs 18ct",price:2.50,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null,note:"2 for $5"},
-    {item:"Daisy Sour Cream",price:2.79,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null},
-    {item:"Sweet Cow Condensed or Evaporated Milk",price:1.67,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null,note:"3/$5"},
-    {item:"Philadelphia Cream Cheese",price:3.99,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null},
+    {item:"Vital Farms Organic Pasture-Raised Eggs",price:8.99,unit:"dozen",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    {item:"Oscar Mayer Family Pack Deli Fresh Lunch Meal",price:6.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    {item:"Saffron Road Entr\u00e9e",price:4.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    {item:"Daisy Sour Cream or Juantonio's Tortilla Chips",price:2.00,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null,note:"2 for $4"},
+    {item:"Hilshire Farm Deli Meat",price:3.99,unit:"ea",store:"Raley's",category:"Dairy & Eggs",reg:null},
+    // -- Cardenas (UPDATED Sep 9-15) --
+    {item:"Cacique Ranchero Cheese or Mexican Cream",price:1.00,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null,note:"2 for $2"},
+    {item:"Borden Cheese",price:2.50,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null,note:"2 for $5"},
+    {item:"Daisy Sour Cream",price:2.99,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null},
     {item:"Yoplait Yogurt",price:0.69,unit:"ea",store:"Cardenas",category:"Dairy & Eggs",reg:null},
     // -- Sprouts (UNCHANGED) --
     {item:"Vital Farms Organic Pasture-Raised Eggs",price:6.99,unit:"ea",store:"Sprouts",category:"Dairy & Eggs",reg:null,note:"unverified, needs in-store check"},
     {item:"Nutpods Almond + Coconut Creamer",price:5.99,unit:"ea",store:"Sprouts",category:"Dairy & Eggs",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Pr\u00e9sident Feta Cheese",price:4.99,unit:"ea",store:"Sprouts",category:"Dairy & Eggs",reg:null,note:"unverified, needs in-store check"},
     {item:"Three Bridges Egg Bites",price:5.99,unit:"ea",store:"Sprouts",category:"Dairy & Eggs",reg:null,note:"unverified, needs in-store check"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"Kraft Philadelphia Cream Cheese",price:2.99,unit:"ea",store:"Smart & Final",category:"Dairy & Eggs",reg:4.49},
-    {item:"First Street Butter Quarters",price:4.49,unit:"ea",store:"Smart & Final",category:"Dairy & Eggs",reg:5.49},
-    {item:"First Street Shredded Cheese",price:5.99,unit:"ea",store:"Smart & Final",category:"Dairy & Eggs",reg:null},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Shredded Cheese 2 lb",price:5.99,unit:"ea",store:"Smart & Final",category:"Dairy & Eggs",reg:null},
+    {item:"Daisy Sour Cream",price:3.49,unit:"ea",store:"Smart & Final",category:"Dairy & Eggs",reg:null},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Queso Fresco",price:4.49,unit:"/lb",store:"Rancho San Miguel",category:"Dairy & Eggs",reg:null},
     {item:"El Mexicano Queso Fresco",price:2.98,unit:"15 oz",store:"Rancho San Miguel",category:"Dairy & Eggs",reg:null},
@@ -895,14 +901,14 @@ const deals = [
     {item:"Great Value Milk 2% Half Gallon",price:1.62,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null},
     {item:"Great Value Fiesta Blend Shredded Cheese 8oz",price:1.87,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null,note:"Rollback"},
     {item:"Great Value Pumpkin Spice Creamer 32oz",price:2.78,unit:"ea",store:"Walmart",category:"Dairy & Eggs",reg:null},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Good & Gather Cream Cheese",price:1.69,unit:"8 oz",store:"Target",category:"Dairy & Eggs",reg:null,note:"plain"},
     {item:"Chobani Flip Single-Serve Yogurt",price:1.19,unit:"4.5 oz",store:"Target",category:"Dairy & Eggs",reg:null,note:"4 for $5"},
     {item:"Sargento Sliced Cheese",price:2.38,unit:"8 oz",store:"Target",category:"Dairy & Eggs",reg:null,note:"2 for $5"},
     {item:"Tillamook Cheese Snack Portions",price:2.85,unit:"7.5 oz",store:"Target",category:"Dairy & Eggs",reg:null,note:"2 for $6"},
 
     // === FROZEN ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Nestl\u00e9 Novelties",price:3.99,unit:"ea",store:"FoodMaxx",category:"Frozen",reg:null,note:"4-6 ct or Outshine Fruit Bars 6 ct"},
     {item:"Dreyer's Ice Cream",price:2.97,unit:"ea",store:"FoodMaxx",category:"Frozen",reg:null,note:"1.5 qt, Digital Coupon"},
     // -- Food 4 Less (UPDATED) --
@@ -918,26 +924,22 @@ const deals = [
     {item:"MorningStar Farms Products",price:3.97,unit:"ea",store:"Save Mart",category:"Frozen",reg:null,note:"5.25-10.5 oz"},
     {item:"Totino's Pizza Rolls or El Monterey Burritos",price:9.99,unit:"ea",store:"Save Mart",category:"Frozen",reg:null,note:"100 ct or 36 oz"},
     {item:"California Pizza Kitchen Pizza",price:6.99,unit:"ea",store:"Save Mart",category:"Frozen",reg:null},
-    // -- Vallarta (UNCHANGED) --
+// -- Vallarta (UNCHANGED) --
     {item:"Thrifty Ice Cream",price:3.99,unit:"ea",store:"Vallarta",category:"Frozen",reg:null,note:"unverified, needs in-store check"},
     {item:"Eggo Waffles or Pancakes",price:3.00,unit:"ea",store:"Vallarta",category:"Frozen",reg:null,note:"2/$6; unverified, needs in-store check"},
     {item:"Bibigo Single Serve Entrees",price:3.50,unit:"ea",store:"Vallarta",category:"Frozen",reg:null,note:"2/$7; unverified, needs in-store check"},
     {item:"London Dairy Mini Ice Cream Bars",price:5.99,unit:"ea",store:"Vallarta",category:"Frozen",reg:null,note:"unverified, needs in-store check"},
     {item:"Luigi's Ice Pops",price:3.50,unit:"ea",store:"Vallarta",category:"Frozen",reg:null,note:"2/$7; unverified, needs in-store check"},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"Amy's Frozen Burritos 5.5-6oz",price:3.14,unit:"ea",store:"Whole Foods",category:"Frozen",reg:4.79,note:"Prime price"},
-    {item:"So Delicious Dairy Free Ice Cream",price:5.18,unit:"ea",store:"Whole Foods",category:"Frozen",reg:7.19,note:"28% off, Prime"},
-    {item:"Straus Ice Cream 16-32oz",price:6.39,unit:"ea",store:"Whole Foods",category:"Frozen",reg:7.99,note:"20% off, Prime"},
-    {item:"GOODLES Mac & Cheese",price:3.07,unit:"ea",store:"Whole Foods",category:"Frozen",reg:4.39,note:"30% off, Prime"},
-    {item:"SAMBAZON Smoothie Packs & Desserts",price:5.03,unit:"ea",store:"Whole Foods",category:"Frozen",reg:6.99,note:"28% off, Prime"},
-    // -- Raley's (UNCHANGED) --
-    {item:"Ore-Ida Potatoes",price:3.99,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
-    {item:"Dreyer's Ice Cream",price:3.00,unit:"ea",store:"Raley's",category:"Frozen",reg:null,note:"2 for $6"},
-    {item:"Drumstick Cones or H\u00e4agen-Dazs Ice Cream or Bars",price:5.00,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Stahlbush Island Farms Frozen Vegetables 10oz",price:3.99,unit:"ea",store:"Whole Foods",category:"Frozen",reg:null,note:"22% off"},
+    // -- Raley's (UPDATED Sep 9-15) --
+    {item:"Ben & Jerry's Ice Cream or Bars",price:3.99,unit:"pint",store:"Raley's",category:"Frozen",reg:null},
     {item:"Outshine Fruit Bars or Frollies Fruity Ice Pops",price:3.99,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
     {item:"El Monterey Burritos or Chimichangas",price:3.99,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
     {item:"Kellogg's Eggo Waffles",price:4.49,unit:"ea",store:"Raley's",category:"Frozen",reg:4.79},
     {item:"Eggo Thick & Fluffy",price:4.99,unit:"ea",store:"Raley's",category:"Frozen",reg:5.29},
+    {item:"Caulipower Pizza, Fruit Riot! Sour Fruit or Nob Hill Trading Co. Wood Fired Pizza",price:5.00,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
+    {item:"Jesse & Ben's Fries, Ling Ling Potstickers or Newman's Own Pizza",price:6.99,unit:"ea",store:"Raley's",category:"Frozen",reg:null},
     // -- Sprouts (UNCHANGED) --
     {item:"Jolly Llama Frozen Cones",price:5.99,unit:"ea",store:"Sprouts",category:"Frozen",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Blue Zones Kitchen Frozen Bowls",price:6.99,unit:"ea",store:"Sprouts",category:"Frozen",reg:null,note:"B1G1 FREE; unverified, needs in-store check",bogo:"FREE"},
@@ -946,8 +948,11 @@ const deals = [
     {item:"Yummy Chicken Nuggets",price:6.99,unit:"ea",store:"Sprouts",category:"Frozen",reg:null,note:"Super BOGO Sale; unverified, needs in-store check",bogo:"SUPER"},
     {item:"Jack & Annie's Frozen Meat Alternatives",price:3.99,unit:"ea",store:"Sprouts",category:"Frozen",reg:null,note:"unverified, needs in-store check"},
     {item:"Van Leeuwen Ice Cream",price:6.99,unit:"ea",store:"Sprouts",category:"Frozen",reg:null,note:"unverified, needs in-store check"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"Nestl\u00e9 Drumsticks or Vanilla Sandwiches",price:2.99,unit:"ea",store:"Smart & Final",category:"Frozen",reg:null},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Tillamook Ice Cream 48 oz",price:3.99,unit:"ea",store:"Smart & Final",category:"Frozen",reg:null},
+    {item:"Helados Mexico Ice Cream Bars",price:9.49,unit:"ea",store:"Smart & Final",category:"Frozen",reg:null,note:"larger packages"},
+    {item:"Kellogg's Eggo Waffles or Jos\u00e9 Ol\u00e9 Taquitos",price:5.99,unit:"ea",store:"Smart & Final",category:"Frozen",reg:null},
+    {item:"Posada Beef Chimichangas or Green Burritos",price:18.99,unit:"ea",store:"Smart & Final",category:"Frozen",reg:null},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Dreyer's Ice Cream",price:2.98,unit:"1.5 qt",store:"Rancho San Miguel",category:"Frozen",reg:null},
     {item:"Eggo Waffles 10ct",price:2.98,unit:"ea",store:"Rancho San Miguel",category:"Frozen",reg:null},
@@ -965,7 +970,7 @@ const deals = [
     {item:"Birds Eye Steamfresh Mixed Vegetables 10oz",price:1.00,unit:"ea",store:"Walmart",category:"Frozen",reg:1.38,note:"Rollback"},
     {item:"Great Value Frozen Jumbo Shrimp 16oz",price:9.62,unit:"ea",store:"Walmart",category:"Frozen",reg:10.97},
     {item:"Smucker's Uncrustables Blueberry 8ct",price:9.84,unit:"ea",store:"Walmart",category:"Frozen",reg:null,unitPrice:1.23},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Good & Gather Frozen Appetizers",price:5.00,unit:"pkg",store:"Target",category:"Frozen",reg:null,note:"select varieties"},
     {item:"Bagel Bites Mini Pizza Bagels",price:6.19,unit:"18.6 oz",store:"Target",category:"Frozen",reg:6.19,note:"BOGO 25% off",bogo:"25"},
     // -- DG Market (UNCHANGED) --
@@ -974,7 +979,7 @@ const deals = [
     {item:"Devour Entrees or Delimex Bowls",price:3.50,unit:"11-12.8 oz",store:"DG Market",category:"Frozen",reg:null,note:"2/$7, DG ad 9/6-9/12"},
 
     // === BEVERAGES ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Capri-Sun",price:2.99,unit:"ea",store:"FoodMaxx",category:"Beverages",reg:null,note:"10 pack 6 oz, Mix & Match buy 2",unitPrice:0.30},
     {item:"Sunny Select Water",price:3.98,unit:"ea",store:"FoodMaxx",category:"Beverages",reg:null,note:"35 pack 16.9 oz +CRV, Mix & Match buy 3",unitPrice:0.11},
     // -- Food 4 Less (UPDATED) --
@@ -988,37 +993,43 @@ const deals = [
     {item:"Tropicana Orange Juice",price:7.99,unit:"ea",store:"Save Mart",category:"Beverages",reg:null},
     {item:"Minute Maid Punch or Lemonade",price:1.97,unit:"ea",store:"Save Mart",category:"Beverages",reg:null,note:"59 oz"},
     {item:"Red Bull",price:9.99,unit:"ea",store:"Save Mart",category:"Beverages",reg:null,note:"4 pack 12 oz"},
-    // -- Vallarta (UNCHANGED) --
+// -- Vallarta (UNCHANGED) --
     {item:"Capri Sun Juice Drinks",price:2.99,unit:"box",store:"Vallarta",category:"Beverages",reg:null,note:"unverified, needs in-store check"},
     {item:"Crystal Geyser Water",price:0.99,unit:"ea",store:"Vallarta",category:"Beverages",reg:null,note:"unverified, needs in-store check"},
     {item:"Coca-Cola/Pepsi/Fanta/Sprite 2L",price:1.67,unit:"ea",store:"Vallarta",category:"Beverages",reg:2.99,note:"3/$5, 2L bottles, +CRV; unverified, needs in-store check"},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"Halfday Ready-to-Drink Teas",price:2.00,unit:"ea",store:"Whole Foods",category:"Beverages",reg:2.49,note:"2 for $4, Prime"},
-    {item:"Evolution Fresh Juice/Sodas/Teas",price:2.09,unit:"ea",store:"Whole Foods",category:"Beverages",reg:2.99,note:"30% off, Prime"},
-    {item:"Honest Kids Juice Boxes",price:3.59,unit:"ea",store:"Whole Foods",category:"Beverages",reg:4.79,note:"25% off, Prime"},
-    {item:"Silk Shelf-Stable Soy Milk 6pk",price:6.49,unit:"ea",store:"Whole Foods",category:"Beverages",reg:8.99,note:"Prime price"},
-    {item:"RTD Multi-Serve Coffee (Califia/La Colombe/Starbucks)",price:4.99,unit:"ea",store:"Whole Foods",category:"Beverages",reg:7.49,note:"33% off, Prime"},
-    // -- Raley's (UNCHANGED) --
-    {item:"12-Pack Coca-Cola, Pepsi, 7-UP or Dr Pepper",price:4.99,unit:"12pk",store:"Raley's",category:"Beverages",reg:null,unitPrice:0.42},
-    {item:"8-Pack Waterloo Sparkling Water",price:3.99,unit:"8pk",store:"Raley's",category:"Beverages",reg:null,unitPrice:0.50},
-    {item:"8-Pack Gatorade Sport Drink",price:5.99,unit:"8pk",store:"Raley's",category:"Beverages",reg:null,unitPrice:0.75},
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"ZICO Coconut Water 1L",price:4.50,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"2 for $9"},
+    {item:"Koia Select Protein Shakes 12oz",price:3.50,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"2 for $7"},
+    {item:"Simply Juices or Lemonades",price:2.09,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"27% off"},
+    {item:"Nixie Sodas 4pk",price:6.29,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"Prime price"},
+    {item:"Just Ice Tea RTD Teas 16oz",price:2.50,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"2 for $5"},
+    {item:"Yogi Tea Wellness Teas",price:4.99,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"20% off"},
+    {item:"Whitehaven Sauvignon Blanc 750ml",price:19.99,unit:"ea",store:"Whole Foods",category:"Beverages",reg:null,note:"10% off"},
+    // -- Raley's (UPDATED Sep 9-15) --
+    {item:"12-Pack Modelo, Corona, Pacifico, Stella Artois or Sapporo or 8-Pack Guinness",price:13.99,unit:"pack",store:"Raley's",category:"Beverages",reg:null},
+    {item:"Calypso Lemonade or Sparkling Ice Sparkling Water",price:0.79,unit:"ea",store:"Raley's",category:"Beverages",reg:null},
+    {item:"Simply Juice or Cranberry Cocktail",price:2.99,unit:"ea",store:"Raley's",category:"Beverages",reg:null},
+    {item:"Florida's Natural Orange or Grapefruit Juice",price:3.50,unit:"bottle",store:"Raley's",category:"Beverages",reg:null,note:"2 for $7"},
+    {item:"GT's Synergy Kombucha or Alive Elixir",price:3.00,unit:"bottle",store:"Raley's",category:"Beverages",reg:null,note:"2 for $6"},
+    {item:"10-Pack 7UP, Canada Dry or A&W, 8-Pack Snapple Tea or 6-Pack Bai Beverage",price:5.99,unit:"pack",store:"Raley's",category:"Beverages",reg:null},
+    {item:"6-Pack Coca-Cola, Pepsi, 7UP or Dr Pepper",price:3.50,unit:"pack",store:"Raley's",category:"Beverages",reg:null,note:"2 for $7"},
+    {item:"8-Pack Waterloo Sparkling Water",price:3.99,unit:"pack",store:"Raley's",category:"Beverages",reg:null},
     {item:"Gatorade",price:1.50,unit:"ea",store:"Raley's",category:"Beverages",reg:null,note:"2 for $3"},
-    {item:"Raley's 24-Pack Purified Water",price:1.99,unit:"24pk",store:"Raley's",category:"Beverages",reg:null,unitPrice:0.08},
-    // -- Cardenas (UNCHANGED) --
-    {item:"Capri Sun Flavored Juice Drinks",price:7.99,unit:"ea",store:"Cardenas",category:"Beverages",reg:null},
-    {item:"Casa Cardenas Purified Water 32pk",price:3.66,unit:"ea",store:"Cardenas",category:"Beverages",reg:null,note:"3/$10.99",unitPrice:0.11},
+    {item:"Fairlife Core Power Protein Shake",price:3.50,unit:"bottle",store:"Raley's",category:"Beverages",reg:null,note:"2 for $7"},
+    {item:"Yerba Madre Organic Yerba Mate",price:2.50,unit:"can",store:"Raley's",category:"Beverages",reg:null,note:"2 for $5"},
+    {item:"18-Pack Michelob Ultra, Miller, Coors or Budweiser",price:19.99,unit:"ea",store:"Raley's",category:"Beverages",reg:null},
+    {item:"6-Pack Athletic Non-Alcoholic Beer",price:9.99,unit:"ea",store:"Raley's",category:"Beverages",reg:null},
+    // -- Cardenas (UNCHANGED - beverages not in new ad summary) --
+    {item:"Capri Sun Flavored Juice Drinks",price:7.99,unit:"ea",store:"Cardenas",category:"Beverages",reg:null,note:"prior ad, needs in-store check"},
+    {item:"Casa Cardenas Purified Water 32pk",price:3.66,unit:"ea",store:"Cardenas",category:"Beverages",reg:null,note:"3/$10.99, prior ad, needs in-store check",unitPrice:0.11},
     // -- Sprouts (UNCHANGED) --
     {item:"Peace Organic Coffee",price:12.99,unit:"ea",store:"Sprouts",category:"Beverages",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Lakewood Littles Juice Boxes",price:4.99,unit:"ea",store:"Sprouts",category:"Beverages",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Zevia Sodas",price:5.99,unit:"ea",store:"Sprouts",category:"Beverages",reg:null,note:"unverified, needs in-store check"},
     {item:"C2O Coconut Water",price:3.99,unit:"ea",store:"Sprouts",category:"Beverages",reg:null,note:"Super BOGO Sale; unverified, needs in-store check",bogo:"SUPER"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"First Street 100% Apple Juice",price:3.99,unit:"ea",store:"Smart & Final",category:"Beverages",reg:4.99},
-    {item:"Jarritos Soda",price:1.99,unit:"ea",store:"Smart & Final",category:"Beverages",reg:null,note:"Buy 2 Get 1 FREE"},
-    {item:"Gatorade",price:17.99,unit:"24 pk",store:"Smart & Final",category:"Beverages",reg:null,unitPrice:0.75},
-    {item:"Coca-Cola Minis",price:4.99,unit:"ea",store:"Smart & Final",category:"Beverages",reg:null},
-    {item:"Torani Syrup",price:7.99,unit:"bottle",store:"Smart & Final",category:"Beverages",reg:10.99,note:"Buy 3 Get 1 FREE, digital coupon"},
-    {item:"Simply Refreshing Sparkling Water",price:3.99,unit:"ea",store:"Smart & Final",category:"Beverages",reg:4.99,note:"Buy 2 Save $1"},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Keurig K-Cups",price:5.99,unit:"ea",store:"Smart & Final",category:"Beverages",reg:null},
+    {item:"Tree Top Apple Juice",price:2.79,unit:"ea",store:"Smart & Final",category:"Beverages",reg:null},
     // -- Rancho San Miguel (UPDATED) --
     {item:"7-UP & Pepsi Soft Drinks",price:9.98,unit:"24-pk",store:"Rancho San Miguel",category:"Beverages",reg:null,unitPrice:0.42},
     {item:"POWERADE Sports Drink",price:4.48,unit:"6/12 oz",store:"Rancho San Miguel",category:"Beverages",reg:null,unitPrice:0.75},
@@ -1044,7 +1055,7 @@ const deals = [
     {item:"Starbucks Refreshers Mango Dragonfruit 32oz",price:8.97,unit:"ea",store:"Walmart",category:"Beverages",reg:9.97},
     {item:"Starbucks K-Cup Pike Place 22ct",price:16.97,unit:"ea",store:"Walmart",category:"Beverages",reg:19.17,unitPrice:0.77},
     {item:"Peak H2O Electrolyte Drink Mix 30ct",price:5.97,unit:"ea",store:"Walmart",category:"Beverages",reg:null,unitPrice:0.20},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Coca-Cola 12-Packs",price:5.07,unit:"12 ct",store:"Target",category:"Beverages",reg:8.89,note:"buy 3 save 40%",unitPrice:0.42},
     {item:"Deer Park Bottled Water",price:5.99,unit:"32 pk",store:"Target",category:"Beverages",reg:null,note:"Zephyrhills in select stores",unitPrice:0.19},
     {item:"LaCroix Sparkling Water",price:3.67,unit:"8 pk",store:"Target",category:"Beverages",reg:null,note:"3 for $11",unitPrice:0.46},
@@ -1056,7 +1067,7 @@ const deals = [
     {item:"Gatorade",price:6.50,unit:"8 pk",store:"DG Market",category:"Beverages",reg:null,note:"2/$13, DG ad 9/6-9/12",unitPrice:0.81},
 
     // === SNACKS ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"OREO or Chips Ahoy",price:3.48,unit:"ea",store:"FoodMaxx",category:"Snacks",reg:null,note:"7-14.03 oz, select varieties"},
     // -- Food 4 Less (UPDATED) --
     {item:"Doritos, Lay's, Fritos or Cheetos",price:2.50,unit:"bag",store:"Food 4 Less",category:"Snacks",reg:null,note:"4/$10"},
@@ -1068,34 +1079,36 @@ const deals = [
     {item:"Nabisco Multi-Pack Cookies or Crackers",price:5.99,unit:"10 ct",store:"Save Mart",category:"Snacks",reg:null},
     {item:"Family Size Oreo",price:3.47,unit:"ea",store:"Save Mart",category:"Snacks",reg:null,note:"10.68-18.71 oz"},
     {item:"Entenmann's Little Bites",price:2.50,unit:"ea",store:"Save Mart",category:"Snacks",reg:null,note:"Buy 1 Get 1 FREE",bogo:"FREE"},
-    // -- Vallarta (UNCHANGED) --
+// -- Vallarta (UNCHANGED) --
     {item:"Nabisco Family Size Oreos",price:3.99,unit:"ea",store:"Vallarta",category:"Snacks",reg:null,note:"unverified, needs in-store check"},
     {item:"Nongshim Large Bowls",price:1.00,unit:"ea",store:"Vallarta",category:"Snacks",reg:null,note:"2/$2; unverified, needs in-store check"},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"MadeGood Snacks",price:3.37,unit:"ea",store:"Whole Foods",category:"Snacks",reg:4.49,note:"25% off, Prime"},
-    {item:"Catalina Crunch Cereal",price:6.50,unit:"ea",store:"Whole Foods",category:"Snacks",reg:9.29,note:"30% off, Prime"},
-    {item:"Wasa Crispbreads",price:3.37,unit:"ea",store:"Whole Foods",category:"Snacks",reg:4.49,note:"25% off, Prime"},
-    {item:"Back to Nature Cookies/Crackers",price:3.67,unit:"ea",store:"Whole Foods",category:"Snacks",reg:4.89,note:"25% off, Prime"},
-    {item:"GoMacro Bars",price:2.09,unit:"ea",store:"Whole Foods",category:"Snacks",reg:2.99,note:"30% off, Prime"},
-    {item:"Ozery Bakery Morning Rounds 10.6-12.7oz",price:3.49,unit:"ea",store:"Whole Foods",category:"Snacks",reg:4.69,note:"25% off, Prime"},
-    // -- Raley's (UNCHANGED) --
+    // -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Chocolove Chocolate Bites or Bars",price:4.29,unit:"ea",store:"Whole Foods",category:"Snacks",reg:null,note:"select varieties"},
+    {item:"Quinn Stuffed Pretzel Nuggets 5.6-7oz",price:3.50,unit:"ea",store:"Whole Foods",category:"Snacks",reg:null,note:"2 for $7"},
+    {item:"Late July Tortilla Chips 6-7.5oz",price:4.00,unit:"ea",store:"Whole Foods",category:"Snacks",reg:null,note:"2 for $8"},
+    {item:"Hot Ones Hot Sauces",price:8.49,unit:"ea",store:"Whole Foods",category:"Snacks",reg:null,note:"18% off"},
+    {item:"Sky Valley Sauces",price:4.89,unit:"ea",store:"Whole Foods",category:"Snacks",reg:null,note:"20% off"},
+    // -- Raley's (UPDATED Sep 9-15) --
     {item:"Ruffles, Doritos or Tostitos",price:3.79,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
-    {item:"Lay's or Kettle Cooked Potato Chips, Cheetos or Tostitos Cantina",price:1.99,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
-    {item:"Nabisco Snack Crackers",price:1.99,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
+    {item:"Fritos or Cheetos",price:2.49,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
     {item:"Pepperidge Farm Goldfish Crackers",price:1.99,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
     {item:"Nabisco Chips Ahoy! Cookies",price:2.99,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
-    // -- Cardenas (UNCHANGED) --
-    {item:"Oscar Mayer Lunchables",price:2.99,unit:"ea",store:"Cardenas",category:"Snacks",reg:null},
+    {item:"Late July Tortilla Chips or Kettle Brand Party Size Potato Chips",price:3.99,unit:"ea",store:"Raley's",category:"Snacks",reg:null},
+    {item:"Bugles, Chex Mix, Gardetto's, Blue Diamond Nut-Thins, Takis or The Daily Crave Fries",price:3.50,unit:"bag",store:"Raley's",category:"Snacks",reg:null,note:"2 for $7"},
+    {item:"Lindsay Olives",price:1.67,unit:"can",store:"Raley's",category:"Snacks",reg:null,note:"3 for $5"},
+    // -- Cardenas (UNCHANGED - snacks not in new ad summary) --
+    {item:"Oscar Mayer Lunchables",price:2.99,unit:"ea",store:"Cardenas",category:"Snacks",reg:null,note:"prior ad, needs in-store check"},
     // -- Sprouts (UNCHANGED) --
     {item:"Magic Chocolate Bars or Hu Chocolate",price:4.99,unit:"ea",store:"Sprouts",category:"Snacks",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Simple Mills Crackers/Cookies",price:4.99,unit:"ea",store:"Sprouts",category:"Snacks",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Kettle Brand Potato Chips",price:3.99,unit:"ea",store:"Sprouts",category:"Snacks",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Late July Flavored Tortilla Chips",price:3.99,unit:"ea",store:"Sprouts",category:"Snacks",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"Pringles Snack Stackers",price:5.99,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
-    {item:"Hershey's Milk Chocolate Bars",price:1.49,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
-    {item:"Takis Variety Mix Pack",price:9.99,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
-    {item:"Frito-Lay Party Size",price:3.49,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"Fritos, Cheetos or Funyuns",price:2.49,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
+    {item:"Family Size Oreo Cookies",price:3.99,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
+    {item:"Cheez-It Family Size Crackers or Rana Pasta",price:3.99,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
+    {item:"Hidden Valley Ranch or Kellogg's Nutri-Grain Bars",price:4.69,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
+    {item:"Pop-Tarts",price:2.79,unit:"ea",store:"Smart & Final",category:"Snacks",reg:null},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Lay's Chips",price:1.98,unit:"ea",store:"Rancho San Miguel",category:"Snacks",reg:null},
     {item:"RITZ Crackers",price:2.98,unit:"ea",store:"Rancho San Miguel",category:"Snacks",reg:null},
@@ -1117,7 +1130,7 @@ const deals = [
     {item:"Great Value Vanilla Wafer Cookies 11oz",price:2.87,unit:"ea",store:"Walmart",category:"Snacks",reg:null},
     {item:"Nature Valley Granola Bars 12ct",price:2.97,unit:"ea",store:"Walmart",category:"Snacks",reg:null,unitPrice:0.25},
     {item:"Pringles Sour Cream & Onion 5.5oz",price:2.27,unit:"ea",store:"Walmart",category:"Snacks",reg:null},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Pepperidge Farm Goldfish Crackers",price:1.67,unit:"6.6 oz",store:"Target",category:"Snacks",reg:2.79,note:"3 for $5"},
     {item:"Brach's Candy Corn",price:2.79,unit:"11 oz",store:"Target",category:"Snacks",reg:2.79,note:"BOGO 50% off",bogo:"50"},
     {item:"Nerds Spooky Gummy Clusters",price:3.99,unit:"8 oz",store:"Target",category:"Snacks",reg:3.99,note:"BOGO 50% off",bogo:"50"},
@@ -1131,7 +1144,7 @@ const deals = [
     {item:"Frito-Lay Multi-pack",price:8.00,unit:"pack",store:"DG Market",category:"Snacks",reg:null,note:"final w/ coupon, DG ad 9/6-9/12"},
 
     // === PANTRY ===
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Best Foods Mayonnaise",price:7.97,unit:"ea",store:"FoodMaxx",category:"Pantry",reg:null,note:"48 oz, Digital Coupon"},
     {item:"Wonder Bread or Buns",price:2.88,unit:"ea",store:"FoodMaxx",category:"Pantry",reg:null,note:"13-24 oz, select varieties"},
     {item:"El Mexicano Whole Jalape\u00f1os",price:0.99,unit:"ea",store:"FoodMaxx",category:"Pantry",reg:null,note:"27 oz"},
@@ -1157,32 +1170,44 @@ const deals = [
     {item:"Malt O Meal Cereal",price:3.99,unit:"ea",store:"Vallarta",category:"Pantry",reg:null,note:"unverified, needs in-store check"},
     {item:"Oliverda Extra Virgin Olive Oil",price:4.49,unit:"ea",store:"Vallarta",category:"Pantry",reg:null,note:"unverified, needs in-store check"},
     {item:"Kraft Salad Dressing",price:2.99,unit:"ea",store:"Vallarta",category:"Pantry",reg:null,note:"unverified, needs in-store check"},
-    // -- Whole Foods (UNCHANGED) --
-    {item:"De Cecco Pastas/Pestos/EVOO",price:2.44,unit:"ea",store:"Whole Foods",category:"Pantry",reg:3.49,note:"30% off, Prime"},
-    {item:"American Tuna Canned Albacore 5oz",price:6.17,unit:"ea",store:"Whole Foods",category:"Pantry",reg:9.49,note:"35% off, Prime"},
-    {item:"Colavita Extra-Virgin Olive Oils",price:6.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:9.99,note:"30% off, Prime"},
-    {item:"Bachan's Japanese BBQ Sauces",price:6.64,unit:"ea",store:"Whole Foods",category:"Pantry",reg:9.49,note:"30% off, Prime"},
-    {item:"Nature's Own Sliced Breads 16-20oz",price:3.44,unit:"ea",store:"Whole Foods",category:"Pantry",reg:4.59,note:"25% off, Prime"},
-    {item:"Sir Kensington's Mayo & Sauces",price:3.68,unit:"ea",store:"Whole Foods",category:"Pantry",reg:5.25,note:"30% off, Prime"},
-    // -- Raley's (UNCHANGED) --
+// -- Whole Foods (UPDATED Sep 9-15) --
+    {item:"Blue Diamond Almondmilk",price:4.29,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Gefen Honey",price:5.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Ithaca Hummus",price:5.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Brami Pasta",price:3.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Seggiano Pasta",price:7.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Tessemae's Dressings",price:5.99,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    {item:"Loisa Sauces",price:8.49,unit:"ea",store:"Whole Foods",category:"Pantry",reg:null},
+    // -- Raley's (UPDATED Sep 9-15) --
     {item:"Kellogg's Cereal",price:3.00,unit:"ea",store:"Raley's",category:"Pantry",reg:null,note:"2 for $6"},
     {item:"De Cecco Pasta",price:3.00,unit:"ea",store:"Raley's",category:"Pantry",reg:null,note:"2 for $6"},
-    {item:"General Mills Large Size Cereal or Nature Valley Granola Bars",price:3.49,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
     {item:"Starkist Chunk Light Tuna",price:1.00,unit:"ea",store:"Raley's",category:"Pantry",reg:null,note:"5 for $5"},
-    {item:"Raley's Tortilla Chips",price:2.48,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
-    {item:"Raley's Tomato Ketchup",price:5.98,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
-    // -- Cardenas (UNCHANGED) --
-    {item:"Mahatma Extra Long Grain Rice",price:1.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null,note:"2 lb bag"},
-    {item:"McCormick Mayonnaise",price:3.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Idahoan Mashed Potatoes",price:1.25,unit:"ea",store:"Raley's",category:"Pantry",reg:null,note:"4 for $5"},
+    {item:"Hidden Valley Ranch Dressing",price:4.99,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Sonoma Gourmet Pasta Sauce",price:6.99,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Raley's Alfredo Sauce",price:3.98,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Raley's Chili",price:2.48,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Raley's Pineapple",price:1.98,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Raley's Tomato Sauce",price:1.98,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    {item:"Raley's Seasoning Mix",price:0.98,unit:"ea",store:"Raley's",category:"Pantry",reg:null},
+    // -- Cardenas (UPDATED Sep 9-15) --
+    {item:"Mahatma Rice, Guerrero Tortillas or Knorr",price:3.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Doria Pasta",price:1.25,unit:"ea",store:"Cardenas",category:"Pantry",reg:null,note:"4/$5"},
+    {item:"Juanita's Pozole",price:3.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Maruchan or Sun Vista",price:2.50,unit:"ea",store:"Cardenas",category:"Pantry",reg:null,note:"2/$5"},
+    {item:"Mazola Oil",price:9.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Nutrioli Oil or Crackers",price:3.49,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Do\u00f1a Mar\u00eda Mole",price:2.99,unit:"ea",store:"Cardenas",category:"Pantry",reg:null},
+    {item:"Ranchera Natura's Salsa",price:2.50,unit:"ea",store:"Cardenas",category:"Pantry",reg:null,note:"2/$5"},
     // -- Sprouts (UNCHANGED) --
     {item:"Cascadian Farm Organic Granola Bars/Cereal",price:4.99,unit:"ea",store:"Sprouts",category:"Pantry",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Delallo Pasta or Yo Mama's Sauce",price:3.99,unit:"ea",store:"Sprouts",category:"Pantry",reg:null,note:"Buy 1 Get 1 FREE; unverified, needs in-store check",bogo:"FREE"},
     {item:"Magic Spoon Cereal",price:8.99,unit:"ea",store:"Sprouts",category:"Pantry",reg:null,note:"unverified, needs in-store check"},
-    // -- Smart & Final (UNCHANGED) --
-    {item:"First Street 3-Grain Blend Cereal",price:1.99,unit:"ea",store:"Smart & Final",category:"Pantry",reg:2.99},
-    {item:"First Street Vegetable Oil",price:6.99,unit:"ea",store:"Smart & Final",category:"Pantry",reg:9.99},
-    {item:"Guerrero Corn Tortillas",price:2.99,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null},
-    {item:"Las Palmas Enchilada Sauce",price:2.49,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null},
+    // -- Smart & Final (UPDATED Sep 9-15) --
+    {item:"General Mills Cereal & Selected Snacks",price:1.88,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null},
+    {item:"Rag\u00fa or Bush's Beans",price:1.49,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null},
+    {item:"Anthony's Pasta or Hunt's Sauce",price:0.99,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null},
+    {item:"First Street Ketchup or Mustard",price:1.50,unit:"ea",store:"Smart & Final",category:"Pantry",reg:null,note:"2 for $3"},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Mahatma Jasmine Rice",price:5.98,unit:"5 lb",store:"Rancho San Miguel",category:"Pantry",reg:null},
     {item:"Malt-O-Meal Family Size Cereal",price:3.98,unit:"24-26 oz",store:"Rancho San Miguel",category:"Pantry",reg:null},
@@ -1202,7 +1227,7 @@ const deals = [
     {item:"Maruchan Ramen Noodles 12-ct",price:3.34,unit:"ea",store:"Walmart",category:"Pantry",reg:4.00,note:"Rollback"},
     {item:"Great Value Pumpkin Spice Applesauce 6ct",price:2.47,unit:"ea",store:"Walmart",category:"Pantry",reg:2.78,unitPrice:0.41},
     {item:"HORMEL COMPLEATS Beef Pot Roast 9oz",price:2.48,unit:"ea",store:"Walmart",category:"Pantry",reg:null},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Kraft Mac and Cheese",price:0.95,unit:"7.25 oz",store:"Target",category:"Pantry",reg:null,note:"4 for $4"},
     {item:"Kellogg's Cereal",price:4.50,unit:"ea",store:"Target",category:"Pantry",reg:5.29,note:"2 for $9"},
     // -- DG Market (UNCHANGED) --
@@ -1245,7 +1270,7 @@ const deals = [
     {item:"Jubilee Paper Towels",price:3.98,unit:"6-Roll",store:"Rancho San Miguel",category:"Household",reg:null,unitPrice:0.66},
     // -- Walmart (UPDATED) --
     {item:"Great Value Paper Plates 200ct",price:8.97,unit:"ea",store:"Walmart",category:"Household",reg:9.97,note:"Summer Rollback"},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"up&up Triple-Roll Paper Towels",price:14.99,unit:"pack",store:"Target",category:"Household",reg:null,note:"Make-a-Size triple-roll"},
     {item:"Dixie Ultra Paper Plates",price:2.61,unit:"30 ct",store:"Target",category:"Household",reg:null,note:"2 for $6"},
     // -- DG Market (UNCHANGED) --
@@ -1311,7 +1336,7 @@ const deals = [
     {item:"Vanilla or Chocolate Boston Cake 8 inch",price:15.99,unit:"ea",store:"Cardenas",category:"Bakery & Deli",reg:null},
     // -- Sprouts (UNCHANGED) --
     {item:"True Story Deli Meat",price:5.99,unit:"ea",store:"Sprouts",category:"Bakery & Deli",reg:null,note:"unverified, needs in-store check"},
-    // -- FoodMaxx (UNCHANGED) --
+    // -- FoodMaxx (prior ad Aug 26 - Sep 8; new window Sep 9-22 confirmed, prices pending) --
     {item:"Fresh Strawberry Boston Cr\u00e8me Pie",price:7.99,unit:"ea",store:"FoodMaxx",category:"Bakery & Deli",reg:null,note:"8 inch, select varieties"},
     // -- Rancho San Miguel (UPDATED) --
     {item:"Bolillo",price:0.33,unit:"ea",store:"Rancho San Miguel",category:"Bakery & Deli",reg:null,note:"3 for 99 cents"},
@@ -1322,7 +1347,7 @@ const deals = [
     {item:"Dave's Killer Bread Honey Almond Bars 4ct",price:2.99,unit:"ea",store:"Grocery Outlet",category:"Bakery & Deli",reg:null},
     // -- Walmart (UPDATED) --
     {item:"Soules Kitchen Rotisserie Chicken 8oz",price:2.94,unit:"ea",store:"Walmart",category:"Bakery & Deli",reg:4.47,note:"Rollback"},
-    // -- Target (Sep 7-13) --
+    // -- Target (Sep 6-12) --
     {item:"Ball Park Hot Dog Buns",price:2.38,unit:"8 ct",store:"Target",category:"Bakery & Deli",reg:null,note:"2 for $5"},
     // -- Smart & Final (UNCHANGED) --
     {item:"Artesano Buns or Ball Park Buns",price:2.49,unit:"ea",store:"Smart & Final",category:"Bakery & Deli",reg:null},
